@@ -1,0 +1,13 @@
+{
+    "name": "assets",
+    "version": "1.0.0",
+    "dependencies": {
+        "angular": "1.4.9",
+        "angular-resource": "1.4.9",
+        "underscore": "",
+        "lodash": "",
+        "bootstrap": ">=3.0",
+        "font-awesome": ""
+    },
+    "private": true
+}

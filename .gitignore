@@ -1,0 +1,12 @@
+.DS_Store
+*.csv
+*.pyc
+*.swp
+*.egg-info
+env
+*.sqlite
+node_modules
+.vagrant
+.idea
+assets/bower
+asset/dist

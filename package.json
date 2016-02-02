@@ -1,0 +1,23 @@
+{
+    "name": "app",
+    "devDependencies": {
+        "coffee-script": "",
+        "grunt": "",
+        "grunt-contrib-coffee": "",
+		"typeof" : "latest",
+		"for-each" : "latest",
+        "grunt-include-source" : "",
+		"grunt-contrib-jshint" : "latest",
+		"grunt-contrib-concat" : "latest",
+		"grunt-contrib-uglify" : "latest",
+		"grunt-contrib-cssmin" : "latest",
+		"grunt-contrib-imagemin" : "latest",
+		"grunt-contrib-watch" : "latest",
+		"grunt-targethtml" : "latest",
+		"grunt-json-generator" : "latest",
+		"grunt-text-replace" : "latest",
+		"grunt-shell" : "latest",
+		"grunt-git" : "latest",
+		"grunt-prompt" : "latest"
+    }
+}
