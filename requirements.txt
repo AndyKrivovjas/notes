@@ -1,5 +1,6 @@
 Django>=1.9
 djangorestframework>=3.3
+django-oauth-toolkit
 pillow
 
 # Optional

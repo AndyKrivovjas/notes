@@ -72,7 +72,6 @@ STATIC_URL = '/assets/'
 STATICFILES_DIRS = (
     #os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'assets')),
     os.path.join(os.path.dirname(os.path.dirname(__file__)), "assets"),
-    os.path.join(os.path.dirname(os.path.dirname(__file__)), "app/assets"),
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
@@ -126,6 +125,28 @@ ROOT_URLCONF = 'app.urls'
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'app.wsgi.application'
 
+OAUTH2_PROVIDER = {
+    # this is the list of available scopes
+    'SCOPES': {
+        'read': 'Read scope',
+        'write': 'Write scope',
+        'groups': 'Access to your groups',
+        'users': 'Access to users'
+    }
+}
+
+AUTH_USER_MODEL = 'users.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'oauth2_provider.ext.rest_framework.OAuth2Authentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        #'rest_framework.permissions.IsAdminUser',
+    ),
+}
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -136,6 +157,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'rest_framework',
     'app.api',
+    'app.users',
+    'oauth2_provider',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -173,10 +196,8 @@ LOGGING = {
 
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 
-AUTH_USER_MODEL = 'api.User'
-
 # Don't complain about leading slashes in URL patterns
 SILENCED_SYSTEM_CHECKS = ['urls.W002']
 
 # !!!!!This is for demonstration only!!!!!
-AUTHENTICATION_BACKENDS = ['app.api.auth.AlwaysRootBackend']
+#AUTHENTICATION_BACKENDS = ['app.api.auth.AlwaysRootBackend']

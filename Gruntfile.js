@@ -24,11 +24,12 @@ module.exports = function(grunt) {
 		},
 		js: {
 			header: [
-				bowerDir + 'jquery/dist/jquery.min.js',
+				bowerDir + 'jquery/dist/jquery.js',
 				bowerDir + 'angular/angular.js'
 			],
 			footer: [
 				bowerDir + 'bootstrap/dist/js/bootstrap.min.js',
+				bowerDir + 'lodash/dist/lodash.js',
 				themeDir + 'js/jquery.appear.js',
 				themeDir + 'js/jquery.nicescroll.js',
 				themeDir + 'js/jquery.lettering.js',
