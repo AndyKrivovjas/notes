@@ -9,4 +9,4 @@ node_modules
 .vagrant
 .idea
 assets/bower
-asset/dist
+assets/dist
