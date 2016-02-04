@@ -130,8 +130,8 @@ OAUTH2_PROVIDER = {
     'SCOPES': {
         'read': 'Read scope',
         'write': 'Write scope',
-        'groups': 'Access to your groups',
-        'users': 'Access to users'
+        'users': 'Access to users',
+        'category': 'Access to categories'
     }
 }
 
@@ -158,6 +158,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'app.api',
     'app.users',
+    'app.category',
     'oauth2_provider',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

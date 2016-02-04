@@ -1,5 +1,4 @@
 from app.api.errors import Error
-from rest_framework.parsers import JSONParser
 from .models import User
 from .serializers import UserSerializer
 from .permissions import UserPermissions
@@ -32,10 +31,9 @@ class UserList(APIView):
 
 
 class UserDetail(APIView):
-    # Retrieve, update or delete a user instance.
 
     authentication_classes = [OAuth2Authentication]
-    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope]
+    permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope, ]
     required_scopes = ['users']
 
     def get_object(self, pk):
@@ -61,7 +59,3 @@ class UserDetail(APIView):
             return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    # def delete(self, request, pk, format=None):
-    #     user = self.get_object(pk)
-    #     user.delete()
-    #     return Response(status=status.HTTP_204_NO_CONTENT)
