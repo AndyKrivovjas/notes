@@ -1,0 +1,47 @@
+from .models import Tag
+from .serializers import TagSerializer
+from django.http import Http404
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status, permissions
+
+from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope, OAuth2Authentication
+
+
+class TagList(APIView):
+
+    authentication_classes = [OAuth2Authentication]
+    permission_classes = [permissions.IsAuthenticated, TokenHasScope, ]
+    required_scopes = ['tag']
+
+    def get(self, request, format=None):
+        tag = Tag.objects.filter(name__startswith=request.GET.get('name'))
+        serializer = TagSerializer(tag, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = TagSerializer(data=request.data)
+        if serializer.is_valid():
+            item = serializer.add(request.user, request.data)
+            return Response(TagSerializer(item).data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TagDetail(APIView):
+
+    authentication_classes = [OAuth2Authentication]
+    permission_classes = [permissions.IsAuthenticated, TokenHasScope, ]
+    required_scopes = ['tag']
+
+    def get_object(self, pk):
+        try:
+            return Tag.objects.get(pk=pk)
+        except Tag.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        tag = self.get_object(pk)
+        tag = TagSerializer(tag)
+        if tag:
+            return Response(tag.data)
+        return Response(status=status.HTTP_204_NO_CONTENT)

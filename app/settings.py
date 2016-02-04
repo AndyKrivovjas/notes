@@ -131,7 +131,8 @@ OAUTH2_PROVIDER = {
         'read': 'Read scope',
         'write': 'Write scope',
         'users': 'Access to users',
-        'category': 'Access to categories'
+        'category': 'Access to categories',
+        'tag': 'Access to tags',
     }
 }
 
@@ -159,6 +160,7 @@ INSTALLED_APPS = (
     'app.api',
     'app.users',
     'app.category',
+    'app.tag',
     'oauth2_provider',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
