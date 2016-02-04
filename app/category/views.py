@@ -24,8 +24,8 @@ class CategoryList(APIView):
     def post(self, request, format=None):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
-            serializer.add(request.user, request.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            item = serializer.add(request.user, request.data)
+            return Response(CategorySerializer(item).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -44,7 +44,6 @@ class CategoryDetail(APIView):
     def get(self, request, pk, format=None):
         category = self.get_object(pk)
         category = CategorySerializer(category)
-        print category
         if CategoryPermissions.has_object_permission(request, category.data):
             return Response(category.data)
         return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
@@ -54,8 +53,8 @@ class CategoryDetail(APIView):
         serializer = CategorySerializer(category, data=request.data, partial=True)
         if serializer.is_valid():
             if CategoryPermissions.has_object_permission(request, serializer.data):
-                serializer.update(category, serializer.validated_data)
-                return Response(serializer.data)
+                item = serializer.update(category, serializer.validated_data)
+                return Response(CategorySerializer(item).data)
             return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
