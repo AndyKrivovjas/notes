@@ -8,3 +8,6 @@ class Category(models.Model):
     owner = models.CharField('owner', max_length=255, default='')
     date_added = models.DateTimeField('date_added', blank=True, null=True)
     date_modified = models.DateTimeField('date_modified', blank=True, null=True)
+
+    def __unicode__(self):
+       return self.name
