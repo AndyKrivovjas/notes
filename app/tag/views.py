@@ -1,3 +1,5 @@
+from app.api.errors import Error
+from app.api.permissions import IsOwn
 from .models import Tag
 from .serializers import TagSerializer
 from django.http import Http404
@@ -15,7 +17,7 @@ class TagList(APIView):
     required_scopes = ['tag']
 
     def get(self, request, format=None):
-        tag = Tag.objects.filter(name__startswith=request.GET.get('name'))
+        tag = Tag.objects.filter(creator=request.user.id)
         serializer = TagSerializer(tag, many=True)
         return Response(serializer.data)
 
@@ -41,7 +43,27 @@ class TagDetail(APIView):
 
     def get(self, request, pk, format=None):
         tag = self.get_object(pk)
-        tag = TagSerializer(tag)
-        if tag:
+        if IsOwn.has_object_permission(request, tag):
+            tag = TagSerializer(tag)
             return Response(tag.data)
+        return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk, format=None):
+        tag = self.get_object(pk)
+        serializer = TagSerializer(tag, data=request.data, partial=True)
+        if serializer.is_valid():
+            if IsOwn.has_object_permission(request, tag):
+                item = serializer.update(tag, serializer.validated_data)
+                return Response(TagSerializer(item).data)
+            return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        tag = self.get_object(pk)
+        serializer = TagSerializer(tag)
+        if tag:
+            if IsOwn.has_object_permission(request, tag):
+                tag.delete()
+                return Response(serializer.data)
+            return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
         return Response(status=status.HTTP_204_NO_CONTENT)

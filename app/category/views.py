@@ -48,7 +48,6 @@ class CategoryDetail(APIView):
     def get(self, request, pk, format=None):
         category = self.get_object(pk)
 
-        print request.user
         if IsOwn.has_object_permission(request, category):
             category = CategorySerializer(category)
             return Response(category.data)

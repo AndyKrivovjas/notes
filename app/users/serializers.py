@@ -19,7 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
 
         # Creating default tags
-        TagSerializer.add_defaults(user.id)
+        TagSerializer.add_defaults(user)
 
         return user
 
