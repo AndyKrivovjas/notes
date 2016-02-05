@@ -10,3 +10,5 @@ node_modules
 .idea
 assets/bower
 assets/dist
+**/migrations/*
+!**/migrations/__init__.py
