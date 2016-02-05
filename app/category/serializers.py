@@ -1,4 +1,5 @@
 from datetime import datetime
+from app.users.models import User
 from .models import Category
 from rest_framework import serializers
 

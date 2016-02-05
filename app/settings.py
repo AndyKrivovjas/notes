@@ -133,6 +133,7 @@ OAUTH2_PROVIDER = {
         'users': 'Access to users',
         'category': 'Access to categories',
         'tag': 'Access to tags',
+        'task': 'Access to tasks',
     }
 }
 
@@ -161,6 +162,7 @@ INSTALLED_APPS = (
     'app.users',
     'app.category',
     'app.tag',
+    'app.task',
     'oauth2_provider',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',

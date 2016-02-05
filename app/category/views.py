@@ -1,9 +1,11 @@
 from app.api.errors import Error
+from app.users.models import User
 from .models import Category
 from .serializers import CategorySerializer
 from .permissions import CategoryPermissions
 from django.http import Http404
 from rest_framework.views import APIView
+from rest_framework import generics
 from rest_framework.response import Response
 from rest_framework import status, permissions
 
@@ -23,8 +25,10 @@ class CategoryList(APIView):
 
     def post(self, request, format=None):
         serializer = CategorySerializer(data=request.data)
+        owner = User.objects.get(pk=request.user.id)
+
         if serializer.is_valid():
-            item = serializer.add(request.user, request.data)
+            item = serializer.add(owner, request.data)
             return Response(CategorySerializer(item).data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -43,8 +47,10 @@ class CategoryDetail(APIView):
 
     def get(self, request, pk, format=None):
         category = self.get_object(pk)
-        category = CategorySerializer(category)
-        if CategoryPermissions.has_object_permission(request, category.data):
+
+        print request.user
+        if CategoryPermissions.has_object_permission(request, category):
+            category = CategorySerializer(category)
             return Response(category.data)
         return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
 
@@ -52,7 +58,7 @@ class CategoryDetail(APIView):
         category = self.get_object(pk)
         serializer = CategorySerializer(category, data=request.data, partial=True)
         if serializer.is_valid():
-            if CategoryPermissions.has_object_permission(request, serializer.data):
+            if CategoryPermissions.has_object_permission(request, category):
                 item = serializer.update(category, serializer.validated_data)
                 return Response(CategorySerializer(item).data)
             return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
@@ -62,7 +68,7 @@ class CategoryDetail(APIView):
         category = self.get_object(pk)
         serializer = CategorySerializer(category)
         if category:
-            if CategoryPermissions.has_object_permission(request, serializer.data):
+            if CategoryPermissions.has_object_permission(request, category):
                 category.delete()
                 return Response(serializer.data)
             return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
