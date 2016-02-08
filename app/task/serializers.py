@@ -53,7 +53,6 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
         task.date_modified = now()
         task.save()
 
-        print validated_data
         if validated_data.get('tags'):
             relation = TagRelation.objects.filter(task=task).delete()
             print relation

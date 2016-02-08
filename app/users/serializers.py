@@ -38,3 +38,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+
+class UserScopeSerializer(serializers.ModelSerializer):
+
+    def __init__(self, *args, **kwargs):
+        super(serializers.ModelSerializer, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = User
+        fields = ('scope',)

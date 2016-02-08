@@ -1,6 +1,6 @@
 from app.api.errors import Error
 from .models import User
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserScopeSerializer
 from .permissions import UserPermissions
 from django.http import Http404
 from rest_framework.views import APIView
@@ -8,6 +8,19 @@ from rest_framework.response import Response
 from rest_framework import status, permissions
 
 from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope, OAuth2Authentication
+
+
+class ScopeDetail(APIView):
+    # List all users, or create a new user.
+
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
+    required_scopes = []
+
+    def get(self, request, format=None):
+        user = User.objects.filter(username=request.GET.get('username'))
+        serializer = UserScopeSerializer(user, many=True)
+        return Response(serializer.data[0])
 
 
 class UserList(APIView):

@@ -10,6 +10,7 @@ from rest_framework import status, permissions
 
 from oauth2_provider.ext.rest_framework import TokenHasReadWriteScope, TokenHasScope, OAuth2Authentication
 
+
 class ColorList(APIView):
 
     authentication_classes = []
@@ -20,6 +21,7 @@ class ColorList(APIView):
         colors = Color.objects.all()
         serializer = ColorSerializer(colors, many=True)
         return Response(serializer.data)
+
 
 class TaskList(APIView):
 
