@@ -1,3 +1,5 @@
+import json
+
 from app.api.errors import Error
 from .models import User
 from .serializers import UserSerializer, UserScopeSerializer
@@ -20,7 +22,13 @@ class ScopeDetail(APIView):
     def get(self, request, format=None):
         user = User.objects.filter(username=request.GET.get('username'))
         serializer = UserScopeSerializer(user, many=True)
-        return Response(serializer.data[0])
+        if len(serializer.data):
+            response = Response(serializer.data[0])
+        else:
+            error = Error.RESPONSE_103_USER_DOESNT_EXIST[0]
+            error = {'username': [error['error_message'].format(request.GET.get('username'))]}
+            response = Response(error, status=status.HTTP_400_BAD_REQUEST)
+        return response
 
 
 class UserList(APIView):
@@ -36,6 +44,7 @@ class UserList(APIView):
         return Response(serializer.data)
 
     def post(self, request, format=None):
+        print request.data
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.register(request.data)
@@ -49,21 +58,14 @@ class UserDetail(APIView):
     permission_classes = [permissions.IsAuthenticated, TokenHasReadWriteScope, ]
     required_scopes = ['users']
 
-    def get_object(self, pk):
-        try:
-            return User.objects.get(pk=pk)
-        except User.DoesNotExist:
-            raise Http404
-
-    def get(self, request, pk, format=None):
-        user = self.get_object(pk)
-        user = UserSerializer(user)
+    def get(self, request):
+        user = UserSerializer(request.user)
         if UserPermissions.is_owner(request, user):
             return Response(user.data)
         return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk, format=None):
-        user = self.get_object(pk)
+    def put(self, request):
+        user = request.user
         serializer = UserSerializer(user, data=request.data, partial=True)
         if serializer.is_valid():
             if UserPermissions.is_owner(request, serializer):

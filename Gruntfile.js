@@ -9,6 +9,7 @@ module.exports = function(grunt) {
 	var themeDir 	= assetsDir + 'theme/';
 	var stylesDir 	= assetsDir + 'src/css/';
 	var scriptsDir 	= assetsDir + 'src/js/';
+	var angularDir 	= assetsDir + 'src/angular/';
 
 	var includes = {
 		css: {
@@ -25,7 +26,8 @@ module.exports = function(grunt) {
 		js: {
 			header: [
 				bowerDir + 'jquery/dist/jquery.js',
-				bowerDir + 'angular/angular.js'
+				bowerDir + 'angular/angular.js',
+				bowerDir + 'angular-route/angular-route.js',
 			],
 			footer: [
 				bowerDir + 'bootstrap/dist/js/bootstrap.min.js',
@@ -37,7 +39,16 @@ module.exports = function(grunt) {
 				themeDir + 'js/count-to.js',
 				themeDir + 'js/nivo-lightbox.js',
 				themeDir + 'js/script.js',
-				scriptsDir + 'template.js'
+				scriptsDir + 'template.js',
+				angularDir + 'app.js',
+				angularDir + 'controllers/MainController.js',
+				angularDir + 'controllers/NotesListController.js',
+				angularDir + 'controllers/LoginController.js',
+				angularDir + 'controllers/SideMenuController.js',
+				angularDir + 'services/request.js',
+				angularDir + 'services/authSvc.js',
+				angularDir + 'services/userSvc.js',
+				angularDir + 'directives/loader.js',
 			]
 		}
 	};
@@ -90,7 +101,7 @@ module.exports = function(grunt) {
 
 		watch: {
 			scripts: {
-				files: ['js/**/*.js', '!js/modules/*.js', 'main.html'],
+				files: ['assets/src/js/**/*.js', 'assets/src/angular/**/*.js', 'assets/src/views/main.html', 'Gruntfile.js'],
 				tasks: ['dev']
 			}
 		},
@@ -159,7 +170,7 @@ module.exports = function(grunt) {
 	});
 
 	forEach(config.targethtml, function(value, type) {
-		value.files['app/api/templates/index.html'] = 'app/api/templates/main.html';
+		value.files['app/api/templates/index.html'] = 'assets/src/views/main.html';
 	});
 
 	grunt.initConfig(config);

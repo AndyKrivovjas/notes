@@ -9,12 +9,11 @@ virtualenv env
 source env/bin/activate  
 
 pip install -r requirements.txt  
-make create_database  
-make make_fixtures  
+make setup 
 
 npm install -g grunt-cli bower  
 npm install  
 bower install  
-grunt  
+grunt dev
 
 ./manage.py runserver
