@@ -10,5 +10,9 @@ create_root_user:
 
 make_fixtures:
 	./manage.py create_users
+	./manage.py create_colors
+	./manage.py create_api_application
 
-all: clean create_database create_root_user make_fixtures
+setup: create_database create_root_user make_fixtures
+
+reinstall: clean setup
