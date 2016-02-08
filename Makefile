@@ -1,7 +1,7 @@
 clean:
 	rm -f app.sqlite
 
-create_database:
+migrations:
 	./manage.py makemigrations
 	./manage.py migrate
 
@@ -13,6 +13,6 @@ make_fixtures:
 	./manage.py create_colors
 	./manage.py create_api_application
 
-setup: create_database create_root_user make_fixtures
+setup: migrations create_root_user make_fixtures
 
 reinstall: clean setup

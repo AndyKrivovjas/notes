@@ -6,9 +6,6 @@ from rest_framework import serializers
 
 class TagSerializer(serializers.ModelSerializer):
 
-    def __init__(self, *args, **kwargs):
-        super(serializers.ModelSerializer, self).__init__(*args, **kwargs)
-
     @staticmethod
     def add(user, validated_data):
         tag = Tag(name=validated_data['name'], owner=user)
@@ -32,4 +29,4 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ('id', 'name', 'owner')
+        fields = ('id', 'name',)

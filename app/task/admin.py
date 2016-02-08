@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Task, Color
+from .models import Task, Color, TagRelation
 from app.category.models import Category
 from app.tag.models import Tag
 
@@ -29,4 +29,5 @@ class ColorProxy(Color):
 admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(Task)
+admin.site.register(TagRelation)
 admin.site.register(Color)
