@@ -53,7 +53,8 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 	this.editCategory = function(data) {
 		return request.httpOauth({
 			method: 'PUT',
-			url: '/api/category/' + data.id
+			url: '/api/category/' + data.id,
+			data: data
 		});
 	}
 
