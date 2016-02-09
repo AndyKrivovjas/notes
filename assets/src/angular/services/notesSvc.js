@@ -42,6 +42,21 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 		});
 	}
 
+	this.addCategory = function(data) {
+		return request.httpOauth({
+			method: 'POST',
+			url: '/api/categories/',
+			data: data
+		});
+	}
+
+	this.editCategory = function(data) {
+		return request.httpOauth({
+			method: 'PUT',
+			url: '/api/category/' + data.id
+		});
+	}
+
 	this.deleteCategory = function(data) {
 		return request.httpOauth({
 			method: 'DELETE',

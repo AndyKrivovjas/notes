@@ -32,13 +32,13 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 			$rootScope.user = userInfo;
 		});
 		notesSvc.getTags().then(function(tagsList) {
-			$rootScope.tags = tagsList;
+			$rootScope.tags = tagsList || [];
 		});
 		notesSvc.getCategories().then(function(categoriesList) {
-			$rootScope.categories = categoriesList;
+			$rootScope.categories = categoriesList || [];
 		});
 		notesSvc.getNotes().then(function(notesList) {
-			$rootScope.notes = notesList;
+			$rootScope.notes = notesList || [];
 		});
 	}
 

@@ -81,11 +81,64 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			targetEvent: ev,
 			clickOutsideToClose:true,
 			fullscreen: useFullScreen
-		})
-		.then(function(answer) {
-			$scope.status = 'You said the information was "' + answer + '".';
-		}, function() {
-			$scope.status = 'You cancelled the dialog.';
+		});
+		$scope.$watch(function() {
+			return $mdMedia('xs') || $mdMedia('sm');
+		}, function(wantsFullScreen) {
+			$scope.customFullscreen = (wantsFullScreen === true);
+		});
+	};
+
+	$scope.categoryAlert = function(ev, ind, action, category) {
+		var alertScope = {
+			categories: []
+		};
+
+		angular.extend(alertScope.categories, $rootScope.categories);
+
+		if(action == 'edit') {
+			alertScope.category = category;
+			alertScope.title = category.name + '(Edit)';
+			alertScope.categories.splice(_.findIndex(alertScope.categories, ['id', category.id]), 1);
+			alertScope.save = function(categoryEntity) {
+				notesSvc.editCategory(categoryEntity).then(function(response) {
+					$mdDialog.cancel();
+				});
+			}
+			alertScope.removeCategory = function(categoryEntity) {
+				notesSvc.deleteCategory(category).then(function() {
+					$rootScope.categories.splice(_.findIndex($rootScope.categories, ['id', categoryEntity.id]), 1);
+					$mdDialog.cancel();
+				});
+			}
+		}
+		if(action == 'add') {
+			alertScope.title = 'Create a Category';
+			alertScope.categories.push({name: 'Root', id: 0});
+			alertScope.save = function(categoryEntity) {
+				notesSvc.addCategory(categoryEntity).then(function(response) {
+					$rootScope.categories.push(response);
+					$mdDialog.cancel();
+				});
+			}
+		}
+
+		alertScope.cancel = function() {
+			$mdDialog.cancel();
+		};
+
+		var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+
+		alertScope.dialog = $mdDialog.show({
+			templateUrl: 'assets/src/views/templates/category-form.html',
+			parent: angular.element(document.body),
+			locals: { data: alertScope },
+			controller: ['$scope', 'data', function($scope, data) { 
+				angular.extend($scope, data);
+			}],
+			targetEvent: ev,
+			clickOutsideToClose:true,
+			fullscreen: useFullScreen
 		});
 		$scope.$watch(function() {
 			return $mdMedia('xs') || $mdMedia('sm');

@@ -40,17 +40,17 @@
 						{{category.name}}
 						<span class="pull-right actions">
 							<span class="edit">
-								<i class="fa fa-pencil"></i>
+								<i class="fa fa-pencil" ng-click="categoryAlert($event, $index, 'edit', category)"></i>
 								<md-tooltip md-direction="left">Edit</md-tooltip>
 							</span>
 							<span class="delete">
-								<i class="fa fa-times" ng-click="removeCategory($event, $index, category)"></i>
+								<i class="fa fa-trash" ng-click="removeCategory($event, $index, category)"></i>
 								<md-tooltip md-direction="left">Remove</md-tooltip>
 							</span>
 						</span>
 					</div>
 				</div>
-				<p class="item"><i class="fa fa-plus"></i> Create new</p>
+				<p class="item" ng-click="categoryAlert($event, $index, 'add')"><i class="fa fa-plus"></i> Create new</p>
 			</div>
 		</div>
 	</div>
