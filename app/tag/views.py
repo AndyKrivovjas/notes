@@ -17,7 +17,7 @@ class TagList(APIView):
     required_scopes = ['tag']
 
     def get(self, request, format=None):
-        tag = Tag.objects.filter(creator=request.user.id)
+        tag = Tag.objects.filter(owner=request.user.id)
         serializer = TagSerializer(tag, many=True)
         return Response(serializer.data)
 

@@ -1,1 +1,58 @@
-test
+<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+  <md-toolbar class="md-theme-light">
+    <h1 class="md-toolbar-tools">Get Started</h1>
+  </md-toolbar>
+  <md-content ng-controller="SideMenuController">
+    <div class="wrapper">
+		<div class="user-info block">
+			<div class="heading"><i class="fa fa-user"></i> User</div>
+			<div class="list">
+				<p class="item">{{user.display_name}}</p>
+				<p class="item" ng-click="logout()">Logout</p>
+			</div>
+		</div>
+		<div class="tags block">
+			<div class="heading"><i class="fa fa-tag"></i> Tags</div>
+			<div class="list">
+				<div class="tag-list">
+					<div class="item" ng-repeat="tag in tags">
+						{{tag.name}}
+						<span class="pull-right actions">
+							<span class="edit">
+								<i class="fa fa-pencil" ng-click="tagAlert($event, $index, 'edit', tag)"></i>
+								<md-tooltip md-direction="left">Edit</md-tooltip>
+							</span>
+							<span class="delete">
+								<i class="fa fa-trash" ng-click="removeTag($event, $index, tag)"></i>
+								<md-tooltip md-direction="left">Remove</md-tooltip>
+							</span>
+						</span>
+					</div>
+				</div>
+				<p class="item" ng-click="tagAlert($event, $index, 'add')"><i class="fa fa-plus"></i> Create new</p>
+			</div>
+		</div>
+		<div class="categories block">
+			<div class="heading"><i class="fa fa-tag"></i> Categories</div>
+			<div class="list">
+				<div class="category-list">
+					<div class="item" ng-repeat="category in categories">
+						{{category.name}}
+						<span class="pull-right actions">
+							<span class="edit">
+								<i class="fa fa-pencil"></i>
+								<md-tooltip md-direction="left">Edit</md-tooltip>
+							</span>
+							<span class="delete">
+								<i class="fa fa-times" ng-click="removeCategory($event, $index, category)"></i>
+								<md-tooltip md-direction="left">Remove</md-tooltip>
+							</span>
+						</span>
+					</div>
+				</div>
+				<p class="item"><i class="fa fa-plus"></i> Create new</p>
+			</div>
+		</div>
+	</div>
+  </md-content>
+</md-sidenav>

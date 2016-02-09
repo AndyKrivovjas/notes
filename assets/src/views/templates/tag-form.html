@@ -1,0 +1,30 @@
+<md-dialog ng-cloak class="modal-up">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}}</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Name</label>
+          <input ng-model="tag.name">
+        </md-input-container>
+        <input type="hidden" ng-model="tag.id">
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="remove-entity" ng-click="removeTag(tag)" ng-if="removeTag">
+        <i class="fa fa-trash"></i>
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="cancel()">
+        Cancel
+      </md-button>
+      <md-button ng-click="save(tag)">
+        Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

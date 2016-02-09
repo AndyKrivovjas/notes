@@ -14,11 +14,9 @@ module.exports = function(grunt) {
 	var includes = {
 		css: {
 			header: [
-				bowerDir + 'bootstrap/dist/css/bootstrap.css',
 				bowerDir + 'font-awesome/css/font-awesome.css',
+				bowerDir + 'angular-material/angular-material.css',
 				themeDir + 'css/style.css',
-				themeDir + 'css/animate.css',
-				themeDir + 'css/colors/sky-blue.css',
 				stylesDir + 'main.css'
 			],
 			footer: []
@@ -26,20 +24,19 @@ module.exports = function(grunt) {
 		js: {
 			header: [
 				bowerDir + 'jquery/dist/jquery.js',
+				bowerDir + 'lodash/dist/lodash.js',
 				bowerDir + 'angular/angular.js',
 				bowerDir + 'angular-route/angular-route.js',
 			],
 			footer: [
-				bowerDir + 'bootstrap/dist/js/bootstrap.min.js',
-				bowerDir + 'lodash/dist/lodash.js',
-				themeDir + 'js/jquery.appear.js',
+				bowerDir + 'angular-animate/angular-animate.js',
+				bowerDir + 'angular-aria/angular-aria.js',
+				bowerDir + 'angular-messages/angular-messages.js',
+				bowerDir + 'angular-material/angular-material.js',
+				bowerDir + 'masonry/dist/masonry.pkgd.js',
+				bowerDir + 'angular-masonry-directive/src/angular-masonry-directive.js',
 				themeDir + 'js/jquery.nicescroll.js',
-				themeDir + 'js/jquery.lettering.js',
-				themeDir + 'js/jquery.textillate.js',
-				themeDir + 'js/count-to.js',
-				themeDir + 'js/nivo-lightbox.js',
 				themeDir + 'js/script.js',
-				scriptsDir + 'template.js',
 				angularDir + 'app.js',
 				angularDir + 'controllers/MainController.js',
 				angularDir + 'controllers/NotesListController.js',
@@ -48,6 +45,7 @@ module.exports = function(grunt) {
 				angularDir + 'services/request.js',
 				angularDir + 'services/authSvc.js',
 				angularDir + 'services/userSvc.js',
+				angularDir + 'services/notesSvc.js',
 				angularDir + 'directives/loader.js',
 			]
 		}

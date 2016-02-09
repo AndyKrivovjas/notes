@@ -19,14 +19,13 @@
   <meta name="author" content="Andy">
 
   
-	<link type="text/css" rel="stylesheet" href="assets/bower/bootstrap/dist/css/bootstrap.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/bower/font-awesome/css/font-awesome.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/bower/angular-material/angular-material.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/theme/css/style.css"/>
-	<link type="text/css" rel="stylesheet" href="assets/theme/css/animate.css"/>
-	<link type="text/css" rel="stylesheet" href="assets/theme/css/colors/sky-blue.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/src/css/main.css"/>
 	
 	<script type="text/javascript" src="assets/bower/jquery/dist/jquery.js"></script>
+	<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
 	<script type="text/javascript" src="assets/bower/angular/angular.js"></script>
 	<script type="text/javascript" src="assets/bower/angular-route/angular-route.js"></script>
 	
@@ -49,63 +48,52 @@
       </div>
     </div>
 
-
-    <!-- Start Header Section -->
     <div class="hidden-header"></div>
-    <header class="clearfix">
-
-      <!-- Start  Logo & Naviagtion  -->
-      <div class="navbar navbar-default navbar-top">
-        <div class="wrapper">
-          <div class="navbar-header">
-            <!-- Stat Toggle Nav Link For Mobiles -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <i class="fa fa-bars"></i>
-            </button>
-            <!-- End Toggle Nav Link For Mobiles -->
-            <a class="navbar-brand logo" href="/">
-              <img alt="" src="assets/theme/images/logo.png">
-            </a>
-          </div>
-          <div class="pull-right main-menu" ng-click="toggleSideMenu()" ng-class="sideMenuState">
-            {{user.first_name}}
-          </div>
-        </div>
-
+    <md-toolbar md-scroll-shrink class="toolbar">
+      <div class="md-toolbar-tools">
+        <h2>
+          <a class="navbar-brand logo" href="/">
+            <img alt="" src="assets/theme/images/logo-white.png">
+          </a>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="More" ng-if="name!='login'" ng-click="toggleRight()">
+          <i class="fa fa-navicon"></i>
+        </md-button>
       </div>
-      <!-- End Header Logo & Naviagtion -->
-    </header>
-    <div class="side-menu" ng-include src="'/assets/src/views/side_menu.html'" ng-controller="SideMenuController" ng-class="sideMenuState"></div>
+    </md-toolbar>
+
+    <div class="side-menu" ng-include src="'/assets/src/views/side_menu.html'"></div>
     <!-- End Header Section -->
 
     <div ng-view></div>
 
     <!-- Start Footer Section -->
-    <footer>
+    <!-- <footer>
       <div class="container">
         <div class="row footer-widgets">
-
-          <!-- Start Contact Widget -->
+    
+          Start Contact Widget
           <div class="col-xs-12">
             <div class="footer-widget contact-widget">
               <h4 class="logo"><img src="assets/theme/images/logo-footer.png" class="img-responsive" alt="Footer Logo" /></h4>
               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur fugiat ut accusantium recusandae, ab facilis odio nam sed, architecto qui a labore hic consectetur ullam, ex magnam quaerat, eligendi quod incidunt ratione aspernatur reiciendis omnis nisi? Reiciendis iusto molestias consequuntur consectetur id, porro itaque explicabo voluptas optio, minus, quae delectus ea saepe in ex facere aut expedita voluptatum eaque repellendus libero non blanditiis accusamus nemo voluptatibus. Commodi enim, voluptatem est, culpa totam fuga officiis aliquid itaque architecto quaerat, vero praesentium reprehenderit nobis. Doloribus illum, tempore quasi ab dolorem explicabo velit rerum maxime hic quibusdam eaque architecto quaerat accusamus, aperiam suscipit.</p>
             </div>
           </div>
-          <!-- .col-md-3 -->
-          <!-- End Contact Widget -->
-
-
+          .col-md-3
+          End Contact Widget
+    
+    
         </div>
-        <!-- .row -->
-
-        <!-- Start Copyright -->
+        .row
+    
+        Start Copyright
         <div class="copyright-section">
           <div class="row">
             <div class="col-md-6">
               <p>&copy; 2016 - All Rights Reserved </p>
             </div>
-            <!-- .col-md-6 -->
+            .col-md-6
             <div class="col-md-6">
               <ul class="footer-nav">
                 </li>
@@ -115,14 +103,14 @@
                 </li>
               </ul>
             </div>
-            <!-- .col-md-6 -->
+            .col-md-6
           </div>
-          <!-- .row -->
+          .row
         </div>
-        <!-- End Copyright -->
-
+        End Copyright
+    
       </div>
-    </footer>
+    </footer> -->
     <!-- End Footer Section -->
 
 
@@ -136,16 +124,14 @@
 
    
 	
-	<script type="text/javascript" src="assets/bower/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
-	<script type="text/javascript" src="assets/theme/js/jquery.appear.js"></script>
+	<script type="text/javascript" src="assets/bower/angular-animate/angular-animate.js"></script>
+	<script type="text/javascript" src="assets/bower/angular-aria/angular-aria.js"></script>
+	<script type="text/javascript" src="assets/bower/angular-messages/angular-messages.js"></script>
+	<script type="text/javascript" src="assets/bower/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="assets/bower/masonry/dist/masonry.pkgd.js"></script>
+	<script type="text/javascript" src="assets/bower/angular-masonry-directive/src/angular-masonry-directive.js"></script>
 	<script type="text/javascript" src="assets/theme/js/jquery.nicescroll.js"></script>
-	<script type="text/javascript" src="assets/theme/js/jquery.lettering.js"></script>
-	<script type="text/javascript" src="assets/theme/js/jquery.textillate.js"></script>
-	<script type="text/javascript" src="assets/theme/js/count-to.js"></script>
-	<script type="text/javascript" src="assets/theme/js/nivo-lightbox.js"></script>
 	<script type="text/javascript" src="assets/theme/js/script.js"></script>
-	<script type="text/javascript" src="assets/src/js/template.js"></script>
 	<script type="text/javascript" src="assets/src/angular/app.js"></script>
 	<script type="text/javascript" src="assets/src/angular/controllers/MainController.js"></script>
 	<script type="text/javascript" src="assets/src/angular/controllers/NotesListController.js"></script>
@@ -154,6 +140,7 @@
 	<script type="text/javascript" src="assets/src/angular/services/request.js"></script>
 	<script type="text/javascript" src="assets/src/angular/services/authSvc.js"></script>
 	<script type="text/javascript" src="assets/src/angular/services/userSvc.js"></script>
+	<script type="text/javascript" src="assets/src/angular/services/notesSvc.js"></script>
 	<script type="text/javascript" src="assets/src/angular/directives/loader.js"></script>
 	
 	

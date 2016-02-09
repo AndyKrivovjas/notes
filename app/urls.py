@@ -11,8 +11,8 @@ urlpatterns = [
     #url(r'^', include(router.urls)),
     url(r'^api/', include('app.api.urls')),
     url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
-    url(r'^accounts/login/$', django.contrib.auth.views.login, {'template_name': 'admin/login.html'}),
-    url(r'^accounts/logout/$', django.contrib.auth.views.logout),
+    # url(r'^accounts/login/$', django.contrib.auth.views.login, {'template_name': 'admin/login.html'}),
+    # url(r'^accounts/logout/$', django.contrib.auth.views.logout),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]

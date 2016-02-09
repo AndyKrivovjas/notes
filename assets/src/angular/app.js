@@ -1,4 +1,4 @@
-var notes = angular.module('notes', ['ngRoute']).config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'masonry']).config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$routeProvider.when('/404', {
 		title: 'Page not found',
 		templateUrl: './assets/src/views/404.html',

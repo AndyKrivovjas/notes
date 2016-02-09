@@ -2,24 +2,27 @@ notes.controller('LoginController', ['$scope', '$rootScope', '$location', 'authS
 	function($scope, $rootScope, $location, authSvc){
 
 	$scope.errors = {
-		signin: {},
+		signin: {
+			general: []
+		},
 		signup: {}
 	}
+
+	window.localStorage.access_token = '';
+	window.localStorage.refresh_token = '';
 	
 	$scope.login = function($event, data) {
 		$event.preventDefault();
-		$scope.errors.signin = {};
+		$scope.errors.signin = {general: []};
 		authSvc.getUserScope(data).then(function(response) {
 			data.scope = response.scope;
 			authSvc.getToken(data).then(function(response) {
-				window.localStorage.access_token = response.access_token;
-				window.localStorage.refresh_token = response.refresh_token;
 				$location.path('/');
-			}, function(error) {
-				$scope.errors.signin.general[0] = error.error_description;
+			}, function(response) {
+				$scope.errors.signin.general.push(response.error.error_description);
 			});
-		}, function(error) {
-			$scope.errors.signin = error;
+		}, function(response) {
+			$scope.errors.signin = response.error;
 		});
 	}
 
@@ -28,8 +31,8 @@ notes.controller('LoginController', ['$scope', '$rootScope', '$location', 'authS
 		$scope.errors.signup = {};
 		authSvc.register(data).then(function(response) {
 			$scope.login($event, data);
-		}, function(error) {
-			$scope.errors.signup = error;
+		}, function(response) {
+			$scope.errors.signup = response.error;
 		});
 	}
 

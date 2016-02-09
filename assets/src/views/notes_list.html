@@ -1,106 +1,30 @@
-<div class="section service">
-  <div class="container">
-    <div class="row">
-
-      <!-- Start Service Icon 1 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="01">
-        <div class="service-icon">
-          <i class="fa fa-leaf icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>High Quality Theme</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-
-        </div>
-      </div>
-      <!-- End Service Icon 1 -->
-
-      <!-- Start Service Icon 2 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="02">
-        <div class="service-icon">
-          <i class="fa fa-desktop icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Full Responsive</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 2 -->
-
-      <!-- Start Service Icon 3 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="03">
-        <div class="service-icon">
-          <i class="fa fa-eye icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Retina Display Ready</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 3 -->
-
-      <!-- Start Service Icon 4 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="04">
-        <div class="service-icon">
-          <i class="fa fa-code icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Clean Modern Code</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 4 -->
-
-      <!-- Start Service Icon 5 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="05">
-        <div class="service-icon">
-          <i class="fa fa-rocket icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Fast & Light Theme</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 5 -->
-
-      <!-- Start Service Icon 6 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="06">
-        <div class="service-icon">
-          <i class="fa fa-css3 icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Css3 Transitions</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 6 -->
-
-      <!-- Start Service Icon 7 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="07">
-        <div class="service-icon">
-          <i class="fa fa-download icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Free Updates</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 7 -->
-
-      <!-- Start Service Icon 8 -->
-      <div class="col-md-3 col-sm-6 service-box service-center" data-animation="fadeIn" data-animation-delay="08">
-        <div class="service-icon">
-          <i class="fa fa-umbrella icon-large"></i>
-        </div>
-        <div class="service-content">
-          <h4>Help & Support</h4>
-          <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat Lorem pariatur</p>
-        </div>
-      </div>
-      <!-- End Service Icon 8 -->
-
+<md-content class="md-padding" layout-xs="column" layout="row">
+  <div class='notes-list' masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "columnWidth" : ".grid-sizer", "percentPosition" : true}' flex>
+    <div class="grid-sizer"/>
+    <div class="grid-item" ng-repeat="note in notes track by note.id">
+      <md-card>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">{{note.title}}</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content>
+          <p>
+            {{note.text}}
+          </p>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-icon-button" aria-label="Favorite">
+            <i class="fa fa-heart"></i>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="Settings">
+            <i class="fa fa-navicon"></i>
+          </md-button>
+          <md-button class="md-icon-button" aria-label="Share">
+            <i class="fa fa-share"></i>
+          </md-button>
+        </md-card-actions>
+      </md-card>
     </div>
-    <!-- .row -->
   </div>
-  <!-- .container -->
-</div>
+</md-content>

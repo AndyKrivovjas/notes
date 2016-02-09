@@ -1,9 +1,12 @@
+from rest_framework.fields import Field, CharField
 from .models import User
 from rest_framework import serializers
 from app.tag.serializers import TagSerializer
 
 
 class UserSerializer(serializers.ModelSerializer):
+
+    display_name = CharField(source='first_name') if CharField(source='first_name') else CharField(source='username')
 
     def __init__(self, *args, **kwargs):
         super(serializers.ModelSerializer, self).__init__(*args, **kwargs)
@@ -37,7 +40,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'display_name')
 
 
 class UserScopeSerializer(serializers.ModelSerializer):
