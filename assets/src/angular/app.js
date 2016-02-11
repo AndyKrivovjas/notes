@@ -1,4 +1,4 @@
-var notes = angular.module('notes', ['ngRoute', 'ngMaterial']).config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
+var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment']).config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
 	$routeProvider.when('/404', {
 		title: 'Page not found',
 		templateUrl: './assets/src/views/404.html',
@@ -29,17 +29,27 @@ var notes = angular.module('notes', ['ngRoute', 'ngMaterial']).config(['$routePr
 	$httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
 
-}]).run(['$rootScope', function($rootScope) {
-    $rootScope.page = {
-    	title: 'Notes',
-    	name: 'notes',
-        setTitle: function(title) {
-            this.title = title;
-        }
-    }
+}]).run(['$rootScope', 'amMoment', function($rootScope, amMoment) {
 
-    $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-        $rootScope.page.setTitle(current.$$route.title || 'Notes');
-        $rootScope.name = current.$$route.page || 'notes';
-    });
-}]);
+	amMoment.changeLocale('en');
+
+	moment.tz.add([
+		'America/Los_Angeles|PST PDT|80 70|0101|1Lzm0 1zb0 Op0',
+		'America/New_York|EST EDT|50 40|0101|1Lz50 1zb0 Op0'
+	]);
+
+	$rootScope.page = {
+		title: 'Notes',
+		name: 'notes',
+		setTitle: function(title) {
+			this.title = title;
+		}
+	}
+
+	$rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+		$rootScope.page.setTitle(current.$$route.title || 'Notes');
+		$rootScope.name = current.$$route.page || 'notes';
+	});
+}]).constant('angularMomentConfig', {
+	// timezone: 'America/Los_Angeles'
+});;

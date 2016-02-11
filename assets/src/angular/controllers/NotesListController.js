@@ -10,7 +10,7 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 
 	$scope.removeNote = function(ev, ind, note) {
 		var confirm = $mdDialog.confirm()
-			.title('Would you like to delete ' + note.title + '?')
+			.title('Would you like to delete "' + note.title + '"?')
 			.textContent('The note will be deleted permanently.')
 			.targetEvent(ev)
 			.ok('Delete!')
@@ -27,7 +27,7 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 	$scope.noteAlert = function(ev, ind, action, note) {
 		var alertScope = {};
 
-		alertScope = $rootScope.data;
+		alertScope = angular.copy($rootScope.data);
 		alertScope.action = action;
 
 		alertScope.tags.map( function (tag) {

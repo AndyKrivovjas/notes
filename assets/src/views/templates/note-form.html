@@ -42,7 +42,7 @@
           </md-chip-template>
         </md-chips>
         <div class="text-edited" ng-if="action=='edit'">
-          Edited: <span ng-bind="note.date_modified | date:'MM/dd/yyyy HH:mm:ss'"></span>
+          Edited: <span>{{note.date_modified | amDateFormat:'D MMM h:mma'}}</span>
         </div>
       </div>
     </md-dialog-content>

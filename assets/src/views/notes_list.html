@@ -9,12 +9,12 @@
           </md-card-title-text>
         </md-card-title>
         <md-card-content>
-          <p>
+          <p class="desc" ng-click="noteAlert($event, $index, 'edit', note)">
             {{note.text}}
           </p>
         </md-card-content>
         <div class="text-edited">
-          Edited: <span ng-bind="note.date_modified | date:'MM/dd/yyyy HH:mm:ss'"></span>
+          Edited: <span>{{note.date_modified | amDateFormat:'D MMM h:mma'}}</span>
         </div>
         <md-card-actions layout="row" layout-align="end center">
           <md-button class="md-icon-button" ng-click="noteAlert($event, $index, 'edit', note)">

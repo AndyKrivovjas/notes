@@ -14,7 +14,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 
 	$scope.removeCategory = function(ev, ind, category) {
 		var confirm = $mdDialog.confirm()
-			.title('Would you like to delete ' + category.name + '?')
+			.title('Would you like to delete "' + category.name + '"?')
 			.textContent('The category will be deleted permanently.')
 			.targetEvent(ev)
 			.ok('Delete!')
@@ -30,7 +30,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 
 	$scope.removeTag = function(ev, ind, tag) {
 		var confirm = $mdDialog.confirm()
-			.title('Would you like to delete ' + tag.name + '?')
+			.title('Would you like to delete "' + tag.name + '"?')
 			.textContent('The tag will be deleted permanently.')
 			.targetEvent(ev)
 			.ok('Delete!')
@@ -95,7 +95,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 	$scope.categoryAlert = function(ev, ind, action, category) {
 		var alertScope = {};
 
-		alertScope = $rootScope.data;
+		alertScope = angular.copy($rootScope.data);
 		alertScope.action = action;
 
 		if(action == 'edit') {

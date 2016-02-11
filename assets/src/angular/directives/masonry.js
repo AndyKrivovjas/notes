@@ -1,7 +1,7 @@
 notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope) {
   return {
     restrict: 'AC',
-    controller: function($scope, $element){
+    controller: ['$scope', '$element', function($scope, $element){
       var bricks = [];
       this.addBrick = function(brick){
         bricks.push(brick)
@@ -15,7 +15,7 @@ notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope)
       },function(){
         $element.masonry('reloadItems');
       },true);
-    },
+    }],
     link: function (scope, elem, attrs) {
       elem.masonry({ itemSelector: '.masonry-brick'});
       $rootScope.$on('ngRepeatFinished.data.notes', function() {

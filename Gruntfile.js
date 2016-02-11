@@ -32,6 +32,9 @@ module.exports = function(grunt) {
 				bowerDir + 'angular-aria/angular-aria.js',
 				bowerDir + 'angular-messages/angular-messages.js',
 				bowerDir + 'angular-material/angular-material.js',
+				bowerDir + 'moment/min/moment-with-locales.js',
+				bowerDir + 'moment-timezone/moment-timezone.js',
+				bowerDir + 'angular-moment/angular-moment.js',
 				bowerDir + 'masonry/dist/masonry.pkgd.js',
 				bowerDir + 'nicescroll/jquery.nicescroll.js',
 				scriptsDir + 'template.js',
@@ -200,5 +203,5 @@ module.exports = function(grunt) {
 	grunt.registerTask('min', ['concat', 'cssmin', 'uglify']);
 	grunt.registerTask('dev', ['targethtml:dev', 'compileNode']);
 	grunt.registerTask('production', ['targethtml:production', 'min']);
-	grunt.registerTask('git', ['production', 'shell:git_add', 'prompt:target', 'gitcommit', 'gitpush']);
+	grunt.registerTask('git', ['dev', 'shell:git_add', 'prompt:target', 'gitcommit', 'gitpush']);
 };

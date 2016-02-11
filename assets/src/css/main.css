@@ -298,9 +298,6 @@ md-tooltip {
 .back-to-top:hover i {
   background-color: #57A8EF;
 }
-.notes-list {
-  height: auto !important;
-}
 
 .grid-sizer, .grid-item {
   width: 32%;
@@ -395,6 +392,9 @@ md-autocomplete-wrap input {
 .notes-list md-card-actions button {
   font-size: 18px;
   margin: 0 !important;
+}
+.notes-list .desc {
+  cursor: pointer;
 }
 
 #loader {
