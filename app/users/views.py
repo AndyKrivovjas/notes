@@ -2,7 +2,7 @@ import json
 
 from app.api.errors import Error
 from .models import User
-from .serializers import UserSerializer, UserScopeSerializer
+from .serializers import UserSerializer, UserScopeSerializer, UserSerializerView
 from .permissions import UserPermissions
 from django.http import Http404
 from rest_framework.views import APIView
@@ -40,7 +40,7 @@ class UserList(APIView):
 
     def get(self, request, format=None):
         users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
+        serializer = UserSerializerView(users, many=True)
         return Response(serializer.data)
 
     def post(self, request, format=None):
@@ -59,7 +59,7 @@ class UserDetail(APIView):
     required_scopes = ['users']
 
     def get(self, request):
-        user = UserSerializer(request.user)
+        user = UserSerializerView(request.user)
         if UserPermissions.is_owner(request, user):
             return Response(user.data)
         return Response(Error.RESPONSE_101_NO_PERMISSION, status=status.HTTP_400_BAD_REQUEST)

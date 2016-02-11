@@ -6,13 +6,14 @@ from app.tag.serializers import TagSerializer
 
 class UserSerializer(serializers.ModelSerializer):
 
-    display_name = CharField(source='first_name') if CharField(source='first_name') else CharField(source='username')
 
     def __init__(self, *args, **kwargs):
         super(serializers.ModelSerializer, self).__init__(*args, **kwargs)
 
     @staticmethod
     def register(validated_data):
+        from app.task.serializers import TaskCreateUpdateSerializer
+
         user = User(email=validated_data['email'], username=validated_data['username'])
         if validated_data.get('first_name'):
             user.first_name = validated_data.get('first_name')
@@ -23,6 +24,9 @@ class UserSerializer(serializers.ModelSerializer):
 
         # Creating default tags
         TagSerializer.add_defaults(user)
+
+        # Creating default tasks
+        TaskCreateUpdateSerializer.add_defaults(user)
 
         return user
 
@@ -37,6 +41,15 @@ class UserSerializer(serializers.ModelSerializer):
 
         user.save(force_update=True)
         return user
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'first_name', 'last_name', 'email')
+
+
+class UserSerializerView(serializers.ModelSerializer):
+
+    display_name = CharField(source='first_name') if CharField(source='first_name') else CharField(source='username')
 
     class Meta:
         model = User

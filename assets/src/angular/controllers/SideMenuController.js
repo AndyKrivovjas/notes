@@ -5,6 +5,13 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 		
 	})
 
+	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  || $scope.customFullscreen;
+	$scope.$watch(function() {
+		return $mdMedia('xs') || $mdMedia('sm');
+	}, function(wantsFullScreen) {
+		$scope.customFullscreen = (wantsFullScreen === true);
+	});
+
 	$scope.removeCategory = function(ev, ind, category) {
 		var confirm = $mdDialog.confirm()
 			.title('Would you like to delete ' + category.name + '?')
@@ -14,7 +21,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			.cancel('I\'ve changed my mind');
 		$mdDialog.show(confirm).then(function() {
 			notesSvc.deleteCategory(category).then(function() {
-				$rootScope.categories.splice(ind, 1);
+				$rootScope.data.categories.splice(ind, 1);
 			});
 		}, function() {
 		  
@@ -30,7 +37,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			.cancel('I\'ve changed my mind');
 		$mdDialog.show(confirm).then(function() {
 			notesSvc.deleteTag(tag).then(function() {
-				$rootScope.tags.splice(ind, 1);
+				$rootScope.data.tags.splice(ind, 1);
 			});
 		}, function() {
 		  
@@ -39,6 +46,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 
 	$scope.tagAlert = function(ev, ind, action, tag) {
 		var alertScope = {};
+		alertScope.action = action;
 
 		if(action == 'edit') {
 			alertScope.tag = tag;
@@ -50,16 +58,17 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			}
 			alertScope.removeTag = function(tagEntity) {
 				notesSvc.deleteTag(tag).then(function() {
-					$rootScope.tags.splice(_.findIndex($rootScope.tags, ['id', tagEntity.id]), 1);
+					$rootScope.data.tags.splice(_.findIndex($rootScope.data.tags, ['id', tagEntity.id]), 1);
 					$mdDialog.cancel();
 				});
 			}
 		}
 		if(action == 'add') {
+			alertScope.tag = {};
 			alertScope.title = 'Create a Tag';
 			alertScope.save = function(tagEntity) {
 				notesSvc.addTag(tagEntity).then(function(response) {
-					$rootScope.tags.push(response);
+					$rootScope.data.tags.push(response);
 					$mdDialog.cancel();
 				});
 			}
@@ -68,8 +77,6 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 		alertScope.cancel = function() {
 			$mdDialog.cancel();
 		};
-
-		var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 
 		alertScope.dialog = $mdDialog.show({
 			templateUrl: 'assets/src/views/templates/tag-form.html',
@@ -82,19 +89,14 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			clickOutsideToClose:true,
 			fullscreen: useFullScreen
 		});
-		$scope.$watch(function() {
-			return $mdMedia('xs') || $mdMedia('sm');
-		}, function(wantsFullScreen) {
-			$scope.customFullscreen = (wantsFullScreen === true);
-		});
+		
 	};
 
 	$scope.categoryAlert = function(ev, ind, action, category) {
-		var alertScope = {
-			categories: []
-		};
+		var alertScope = {};
 
-		angular.extend(alertScope.categories, $rootScope.categories);
+		alertScope = $rootScope.data;
+		alertScope.action = action;
 
 		if(action == 'edit') {
 			alertScope.category = category;
@@ -107,17 +109,17 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			}
 			alertScope.removeCategory = function(categoryEntity) {
 				notesSvc.deleteCategory(category).then(function() {
-					$rootScope.categories.splice(_.findIndex($rootScope.categories, ['id', categoryEntity.id]), 1);
+					$rootScope.data.categories.splice(_.findIndex($rootScope.data.categories, ['id', categoryEntity.id]), 1);
 					$mdDialog.cancel();
 				});
 			}
 		}
 		if(action == 'add') {
+			alertScope.category = {};
 			alertScope.title = 'Create a Category';
-			alertScope.categories.push({name: 'Root', id: 0});
 			alertScope.save = function(categoryEntity) {
 				notesSvc.addCategory(categoryEntity).then(function(response) {
-					$rootScope.categories.push(response);
+					$rootScope.data.categories.push(response);
 					$mdDialog.cancel();
 				});
 			}
@@ -126,8 +128,6 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 		alertScope.cancel = function() {
 			$mdDialog.cancel();
 		};
-
-		var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 
 		alertScope.dialog = $mdDialog.show({
 			templateUrl: 'assets/src/views/templates/category-form.html',
@@ -139,11 +139,6 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			targetEvent: ev,
 			clickOutsideToClose:true,
 			fullscreen: useFullScreen
-		});
-		$scope.$watch(function() {
-			return $mdMedia('xs') || $mdMedia('sm');
-		}, function(wantsFullScreen) {
-			$scope.customFullscreen = (wantsFullScreen === true);
 		});
 	};
 

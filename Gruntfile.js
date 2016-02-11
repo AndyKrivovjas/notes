@@ -6,7 +6,6 @@ module.exports = function(grunt) {
 	var assetsDir 	= 'assets/';
 	var bowerDir 	= assetsDir + 'bower/';
 	var distDir 	= assetsDir + 'dist/';
-	var themeDir 	= assetsDir + 'theme/';
 	var stylesDir 	= assetsDir + 'src/css/';
 	var scriptsDir 	= assetsDir + 'src/js/';
 	var angularDir 	= assetsDir + 'src/angular/';
@@ -16,8 +15,8 @@ module.exports = function(grunt) {
 			header: [
 				bowerDir + 'font-awesome/css/font-awesome.css',
 				bowerDir + 'angular-material/angular-material.css',
-				themeDir + 'css/style.css',
-				stylesDir + 'main.css'
+				stylesDir + 'main.css',
+				stylesDir + 'theme-responsive.css',
 			],
 			footer: []
 		},
@@ -34,9 +33,8 @@ module.exports = function(grunt) {
 				bowerDir + 'angular-messages/angular-messages.js',
 				bowerDir + 'angular-material/angular-material.js',
 				bowerDir + 'masonry/dist/masonry.pkgd.js',
-				bowerDir + 'angular-masonry-directive/src/angular-masonry-directive.js',
-				themeDir + 'js/jquery.nicescroll.js',
-				themeDir + 'js/script.js',
+				bowerDir + 'nicescroll/jquery.nicescroll.js',
+				scriptsDir + 'template.js',
 				angularDir + 'app.js',
 				angularDir + 'controllers/MainController.js',
 				angularDir + 'controllers/NotesListController.js',
@@ -47,6 +45,8 @@ module.exports = function(grunt) {
 				angularDir + 'services/userSvc.js',
 				angularDir + 'services/notesSvc.js',
 				angularDir + 'directives/loader.js',
+				angularDir + 'directives/masonry.js',
+				angularDir + 'directives/finish-render.js',
 			]
 		}
 	};

@@ -12,15 +12,18 @@
           <label>Name</label>
           <input ng-model="category.name">
         </md-input-container>
-        <md-select ng-model="category.parent_id">
-          <md-option ng-repeat="parent_entity in categories" value="{{parent_entity.id}}">
-            {{parent_entity.name}}
-          </md-option>
-        </md-select>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Parent category</label>
+          <md-select ng-model="category.parent_id">
+            <md-option ng-repeat="parent_entity in categories" value="{{parent_entity.id}}">
+              {{parent_entity.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <md-button class="remove-entity" ng-click="removeCategory(category)" ng-if="removeCategory">
+      <md-button class="remove-entity" ng-click="removeCategory(category)" ng-if="action=='edit'">
         <i class="fa fa-trash"></i>
       </md-button>
       <span flex></span>

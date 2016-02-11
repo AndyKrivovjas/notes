@@ -6,7 +6,6 @@ from django.utils.timezone import now
 from .models import Task, Color, TagRelation
 from app.category.serializers import CategorySerializer
 from app.tag.serializers import TagSerializer
-from app.users.serializers import UserSerializer
 from rest_framework import serializers
 
 
@@ -31,12 +30,12 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
         if validated_data.get('category'):
             task.category = Category.objects.get(pk=validated_data.get('category'))
         if validated_data.get('color'):
-            task.color = Color.objects.get(pk=validated_data.get('color'))
+            task.color = Color.objects.get(pk=validated_data.get('color')['id'])
         task.save()
 
         if validated_data.get('tags'):
-            for tag_id in validated_data.get('tags').split(','):
-                relation = TagRelation(task=task, tag=Tag.objects.get(pk=tag_id))
+            for tag in validated_data.get('tags'):
+                relation = TagRelation(task=task, tag=Tag.objects.get(pk=tag['id']))
                 relation.save()
         return task
 
@@ -49,26 +48,34 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
         if validated_data.get('category'):
             task.category = Category.objects.get(pk=validated_data.get('category'))
         if validated_data.get('color'):
-            task.color = Color.objects.get(pk=validated_data.get('color'))
+            task.color = Color.objects.get(pk=validated_data.get('color')['id'])
         task.date_modified = now()
         task.save()
 
         if validated_data.get('tags'):
             relation = TagRelation.objects.filter(task=task).delete()
             print relation
-            for tag_id in validated_data.get('tags').split(','):
-                relation = TagRelation(task=task, tag=Tag.objects.get(pk=tag_id))
+            for tag in validated_data.get('tags'):
+                relation = TagRelation(task=task, tag=Tag.objects.get(pk=tag['id']))
                 relation.save()
 
         task.save()
         return task
 
+    @staticmethod
+    def add_defaults(creator):
+        default_tasks = [{'title': 'Welcome', 'color': {'id': 3}, 'text': 'This is your first note. If you want to you can delete it and start using the service. \n Have fun :)'}]
+        for task in default_tasks:
+            TaskCreateUpdateSerializer.add(creator, task)
+
     class Meta:
         model = Task
-        fields = ('id', 'title', 'text', 'category', 'tags', 'color', 'owner', 'date_added', 'date_modified')
+        fields = ('id', 'title', 'text', 'category', 'tags', 'date_added', 'date_modified')
 
 
 class TaskSerializer(serializers.ModelSerializer):
+
+    from app.users.serializers import UserSerializer
 
     tags = TagSerializer(many=True)
     category = CategorySerializer()

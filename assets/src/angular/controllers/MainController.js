@@ -27,18 +27,31 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 
 	$scope.main = function() {
 		$rootScope.$broadcast('auth.checked');
+		if(typeof $rootScope.data == 'undefined') {
+			$rootScope.data = {
+				user: [],
+				tags: [],
+				categories: [],
+				notes: [],
+				colors: []
+			};
+		}
 
 		userSvc.getUser().then(function(userInfo) {
-			$rootScope.user = userInfo;
+			$rootScope.data.user = userInfo;
 		});
 		notesSvc.getTags().then(function(tagsList) {
-			$rootScope.tags = tagsList || [];
+			$rootScope.data.tags = tagsList || [];
 		});
 		notesSvc.getCategories().then(function(categoriesList) {
-			$rootScope.categories = categoriesList || [];
+			$rootScope.data.categories = categoriesList || [];
 		});
 		notesSvc.getNotes().then(function(notesList) {
-			$rootScope.notes = notesList || [];
+			$rootScope.data.notes = notesList || [];
+			$rootScope.$broadcast('notes.loaded');
+		});
+		notesSvc.getColors().then(function(colorsList) {
+			$rootScope.data.colors = colorsList || [];
 		});
 	}
 

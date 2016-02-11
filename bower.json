@@ -11,7 +11,7 @@
         "angular-material": "",
         "angular-masonry-directive": "",
         "masonry": "",
-        "underscore": "",
+        "nicescroll": "",
         "lodash": "",
         "bootstrap": ">=3.0",
         "font-awesome": ""

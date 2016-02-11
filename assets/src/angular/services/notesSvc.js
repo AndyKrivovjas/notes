@@ -74,5 +74,37 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 			url: '/api/tasks/'
 		});
 	}
+
+	this.addNote = function(data) {
+		return request.httpOauth({
+			method: 'POST',
+			url: '/api/tasks/',
+			data: data
+		});
+	}
+
+	this.editNote = function(data) {
+		return request.httpOauth({
+			method: 'PUT',
+			url: '/api/task/' + data.id,
+			data: data
+		});
+	}
+
+	this.deleteNote = function(data) {
+		return request.httpOauth({
+			method: 'DELETE',
+			url: '/api/task/' + data.id,
+		});
+	}
+
+	/* -------------- Notes ---------------*/
+
+	this.getColors = function(data) {
+		return request.httpOauth({
+			method: 'GET',
+			url: '/api/colors/'
+		});
+	}
 	
 }]);

@@ -1,0 +1,77 @@
+<md-dialog ng-cloak class="modal-up">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>{{title}}</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <input type="hidden" ng-model="note.id">
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Title</label>
+          <input ng-model="note.title">
+        </md-input-container>
+        <md-input-container class="md-block" flex-gt-sm>
+          <label>Category</label>
+          <md-select ng-model="note.category">
+            <md-option ng-repeat="category in categories" ng-value="category.id">
+              {{category.name}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+        <md-input-container class="md-block textarea" flex-gt-sm>
+          <label>Description</label>
+          <textarea ng-model="note.text"></textarea>
+        </md-input-container>
+        <md-chips ng-model="note.tags" 
+          md-autocomplete-snap
+          md-require-match="true">
+          <md-autocomplete
+            md-search-text="searchText"
+            md-items="item in querySearch(searchText)"
+            md-item-text="item.name"
+            md-min-length="0"
+            placeholder="+Tag">
+            <md-item-template>{{item.name}}</md-item-template>
+          </md-autocomplete>
+          <md-chip-template>
+            <span>
+              {{$chip.name}}
+            </span>
+          </md-chip-template>
+        </md-chips>
+      </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+      <md-button class="remove-entity" ng-click="removeNote(note)" ng-if="action=='edit'">
+        <i class="fa fa-trash"></i>
+      </md-button>
+      <md-menu>
+        <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+          <i class="fa fa-paint-brush"></i>
+          <md-tooltip md-direction="bottom">
+            Color
+          </md-tooltip>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item ng-repeat="color in colors">
+            <md-button ng-click="applyColor(color)">
+              <div class="color-sample" ng-class="{selected: color==note.color}" style="background-color: {{color.value}};">
+                <i class="fa fa-check"></i>
+              </div>
+              <div class="color-name">{{color.name}}</div>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <span flex></span>
+      <md-button ng-click="cancel()">
+        Cancel
+      </md-button>
+      <md-button ng-click="save(note)">
+        Save
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

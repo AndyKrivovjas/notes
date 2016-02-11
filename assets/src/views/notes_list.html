@@ -1,8 +1,8 @@
 <md-content class="md-padding notes-content" layout-xs="column" layout="row">
-  <div class='notes-list' masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "columnWidth" : ".grid-sizer", "percentPosition" : true}' flex>
+  <div class='notes-list masonry' flex>
     <div class="grid-sizer"/>
-    <div class="grid-item" ng-repeat="note in notes track by note.id">
-      <md-card>
+    <div class="grid-item masonry-brick" ng-repeat="note in data.notes track by note.id" on-finish-render="data.notes">
+      <md-card style="background-color: {{note.color.value}};">
         <md-card-title>
           <md-card-title-text>
             <span class="md-headline">{{note.title}}</span>
@@ -14,17 +14,19 @@
           </p>
         </md-card-content>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-icon-button" aria-label="Favorite">
-            <i class="fa fa-heart"></i>
+          <md-button class="md-icon-button">
+            <i class="fa fa-pencil" ng-click="noteAlert($event, $index, 'edit', note)"></i>
+            <md-tooltip md-direction="left">Edit</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button" aria-label="Settings">
-            <i class="fa fa-navicon"></i>
-          </md-button>
-          <md-button class="md-icon-button" aria-label="Share">
-            <i class="fa fa-share"></i>
+          <md-button class="md-icon-button">
+            <i class="fa fa-trash" ng-click="removeNote($event, $index, note)"></i>
+            <md-tooltip md-direction="left">Remove</md-tooltip>
           </md-button>
         </md-card-actions>
       </md-card>
     </div>
   </div>
+  <md-button aria-label="menu" class="md-fab md-warn add-note" ng-click="noteAlert($event, $index, 'add')">
+    <i class="fa fa-plus"></i>
+  </md-button>
 </md-content>
