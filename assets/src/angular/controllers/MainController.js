@@ -56,7 +56,10 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 	}
 
 	$scope.logout = function() {
-		$scope.toggleRight();
+		var overlay = angular.element('.side-menu md-backdrop');
+		if(overlay.length) {
+			$scope.toggleRight();
+		}
 		$location.path('/login');
 	}
 

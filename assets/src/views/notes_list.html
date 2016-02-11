@@ -13,13 +13,16 @@
             {{note.text}}
           </p>
         </md-card-content>
+        <div class="text-edited">
+          Edited: <span ng-bind="note.date_modified | date:'MM/dd/yyyy HH:mm:ss'"></span>
+        </div>
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-icon-button">
-            <i class="fa fa-pencil" ng-click="noteAlert($event, $index, 'edit', note)"></i>
+          <md-button class="md-icon-button" ng-click="noteAlert($event, $index, 'edit', note)">
+            <i class="fa fa-pencil"></i>
             <md-tooltip md-direction="left">Edit</md-tooltip>
           </md-button>
-          <md-button class="md-icon-button">
-            <i class="fa fa-trash" ng-click="removeNote($event, $index, note)"></i>
+          <md-button class="md-icon-button" ng-click="removeNote($event, $index, note)">
+            <i class="fa fa-trash"></i>
             <md-tooltip md-direction="left">Remove</md-tooltip>
           </md-button>
         </md-card-actions>

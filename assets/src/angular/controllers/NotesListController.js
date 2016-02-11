@@ -49,6 +49,7 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 			alertScope.title = 'Edit';
 			alertScope.save = function(noteEntity) {
 				notesSvc.editNote(noteEntity).then(function(response) {
+					note.date_modified = +new Date;
 					$mdDialog.cancel();
 				});
 			}

@@ -14,7 +14,7 @@
         </md-input-container>
         <md-input-container class="md-block" flex-gt-sm>
           <label>Category</label>
-          <md-select ng-model="note.category">
+          <md-select ng-model="note.category.id">
             <md-option ng-repeat="category in categories" ng-value="category.id">
               {{category.name}}
             </md-option>
@@ -41,11 +41,17 @@
             </span>
           </md-chip-template>
         </md-chips>
+        <div class="text-edited" ng-if="action=='edit'">
+          Edited: <span ng-bind="note.date_modified | date:'MM/dd/yyyy HH:mm:ss'"></span>
+        </div>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
       <md-button class="remove-entity" ng-click="removeNote(note)" ng-if="action=='edit'">
         <i class="fa fa-trash"></i>
+        <md-tooltip md-direction="bottom">
+          Delete
+        </md-tooltip>
       </md-button>
       <md-menu>
         <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
@@ -57,7 +63,7 @@
         <md-menu-content width="4">
           <md-menu-item ng-repeat="color in colors">
             <md-button ng-click="applyColor(color)">
-              <div class="color-sample" ng-class="{selected: color==note.color}" style="background-color: {{color.value}};">
+              <div class="color-sample" ng-class="{selected: color.id==note.color.id}" style="background-color: {{color.value}};">
                 <i class="fa fa-check"></i>
               </div>
               <div class="color-name">{{color.name}}</div>

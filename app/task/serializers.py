@@ -28,7 +28,7 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
     def add(owner, validated_data):
         task = Task(title=validated_data['title'], owner=owner, text=validated_data['text'], date_added=now(), date_modified=now())
         if validated_data.get('category'):
-            task.category = Category.objects.get(pk=validated_data.get('category'))
+            task.category = Category.objects.get(pk=validated_data.get('category')['id'])
         if validated_data.get('color'):
             task.color = Color.objects.get(pk=validated_data.get('color')['id'])
         task.save()
@@ -46,15 +46,15 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
         if validated_data.get('text'):
             task.text = validated_data.get('text')
         if validated_data.get('category'):
-            task.category = Category.objects.get(pk=validated_data.get('category'))
+            task.category = Category.objects.get(pk=validated_data.get('category')['id'])
         if validated_data.get('color'):
             task.color = Color.objects.get(pk=validated_data.get('color')['id'])
         task.date_modified = now()
+        print task.category
         task.save()
 
         if validated_data.get('tags'):
-            relation = TagRelation.objects.filter(task=task).delete()
-            print relation
+            TagRelation.objects.filter(task=task).delete()
             for tag in validated_data.get('tags'):
                 relation = TagRelation(task=task, tag=Tag.objects.get(pk=tag['id']))
                 relation.save()
@@ -70,7 +70,7 @@ class TaskCreateUpdateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Task
-        fields = ('id', 'title', 'text', 'category', 'tags', 'date_added', 'date_modified')
+        fields = ('id', 'title', 'text', 'tags')
 
 
 class TaskSerializer(serializers.ModelSerializer):

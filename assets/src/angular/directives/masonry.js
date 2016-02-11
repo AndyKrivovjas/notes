@@ -13,7 +13,6 @@ notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope)
       $scope.$watch(function(){
         return bricks
       },function(){
-        console.log('reload');
         $element.masonry('reloadItems');
       },true);
     },
@@ -33,7 +32,6 @@ notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope)
       ctrl.addBrick(scope.$id);
       
       scope.$on('$destroy',function(){
-        console.log('destroy');
         ctrl.removeBrick(scope.$id);
       });
     }

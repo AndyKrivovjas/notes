@@ -212,6 +212,9 @@ textarea {
   text-align: right;
   color: #FF5B5B;
 }
+.login-page .mainbar {
+  background: #1ab188;
+}
 .fixed-header .main-menu {
   padding: 19px 20px;
 }
@@ -382,4 +385,78 @@ md-autocomplete-wrap input {
 }
 .color-sample.selected i.fa {
   display: block;
+}
+.text-edited {
+  text-align: right;
+  padding: 10px;
+  font-style: italic;
+  font-size: 13px;
+}
+.notes-list md-card-actions button {
+  font-size: 18px;
+  margin: 0 !important;
+}
+
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #212121;
+  z-index: 99999999999;
+}
+
+.spinner {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  left: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  -webkit-animation: rotatee 2.0s infinite linear;
+  animation: rotatee 2.0s infinite linear;
+}
+
+.dot1, .dot2 {
+  background: #4EA4EF;
+  width: 60%;
+  height: 60%;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  border-radius: 100%;
+  -webkit-animation: bouncee 2.0s infinite ease-in-out;
+  animation: bouncee 2.0s infinite ease-in-out;
+}
+
+.dot2 {
+  top: auto;
+  bottom: 0px;
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+@-webkit-keyframes rotatee { 100% { -webkit-transform: rotate(360deg) }}
+@keyframes rotatee {
+ 100% {
+   transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes bouncee {
+ 0%, 100% { -webkit-transform: scale(0.0) }
+ 50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes bouncee {
+ 0%, 100% {
+   transform: scale(0.0);
+        -webkit-transform: scale(0.0);
+    } 50% {
+        transform: scale(1.0);
+        -webkit-transform: scale(1.0);
+      }
 }
