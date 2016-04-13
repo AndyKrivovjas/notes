@@ -5,6 +5,7 @@
 *.egg-info
 env
 *.sqlite
+!app.sqlite
 node_modules
 .vagrant
 .idea
