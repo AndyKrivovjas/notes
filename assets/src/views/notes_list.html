@@ -29,7 +29,12 @@
       </md-card>
     </div>
   </div>
-  <md-button aria-label="menu" class="md-fab md-warn add-note" ng-click="noteAlert($event, $index, 'add')">
-    <i class="fa fa-plus"></i>
-  </md-button>
+  <div class="bottom-actions">
+    <md-button aria-label="menu" class="md-fab md-default main-menu-button" ng-click="showListBottomSheet()">
+      <i class="fa fa-cogs"></i>
+    </md-button>
+    <md-button aria-label="menu" class="md-fab md-warn add-note" ng-click="noteAlert($event, $index, 'add')">
+      <i class="fa fa-plus"></i>
+    </md-button>
+  </div>
 </md-content>

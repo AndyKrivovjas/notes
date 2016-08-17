@@ -1,5 +1,5 @@
-notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'notesSvc', '$mdDialog', '$mdMedia', '$timeout', 
-	function($scope, $rootScope, $routeParams, $window, $location, notesSvc, $mdDialog, $mdMedia, $timeout){
+notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'notesSvc', '$mdDialog', '$mdBottomSheet', '$mdMedia', '$timeout', 
+	function($scope, $rootScope, $routeParams, $window, $location, notesSvc, $mdDialog, $mdBottomSheet, $mdMedia, $timeout){
 
 	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  || $scope.customFullscreen;
 	$scope.$watch(function() {
@@ -97,7 +97,7 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 		};
 
 		$mdDialog.show({
-			templateUrl: 'assets/src/views/templates/note-form.html',
+			templateUrl: 'assets/src/views/templates/form/note-form.html',
 			parent: angular.element(document.body),
 			locals: { data: alertScope },
 			controller: ['$scope', 'data', function($scope, data) { 
@@ -106,6 +106,14 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 			targetEvent: ev,
 			clickOutsideToClose:true,
 			fullscreen: useFullScreen
+		});
+	};
+
+	$scope.showListBottomSheet = function() {
+		$mdBottomSheet.show({
+			templateUrl: 'assets/src/views/templates/menu/main.html',
+			controller: 'SideMenuController'
+		}).then(function(clickedItem) {
 		});
 	};
 }]);

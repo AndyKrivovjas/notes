@@ -13,6 +13,7 @@
 		"grunt-contrib-cssmin" : "latest",
 		"grunt-contrib-imagemin" : "latest",
 		"grunt-contrib-watch" : "latest",
+		"grunt-contrib-sass" : "latest",
 		"grunt-targethtml" : "latest",
 		"grunt-json-generator" : "latest",
 		"grunt-text-replace" : "latest",

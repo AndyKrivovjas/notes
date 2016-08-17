@@ -2,6 +2,8 @@
 apt-get install python-dev libjpeg-dev zlib1g-dev  
 apt-get install python-virtualenv virtualenvwrapper  
 apt-get install nodejs  
+apt-get install ruby2.0  
+sudo gem install sass
 
 sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib  
 

@@ -7,6 +7,7 @@ module.exports = function(grunt) {
 	var bowerDir 	= assetsDir + 'bower/';
 	var distDir 	= assetsDir + 'dist/';
 	var stylesDir 	= assetsDir + 'src/css/';
+	var sassDir 	= assetsDir + 'src/sass/';
 	var scriptsDir 	= assetsDir + 'src/js/';
 	var angularDir 	= assetsDir + 'src/angular/';
 
@@ -36,13 +37,14 @@ module.exports = function(grunt) {
 				bowerDir + 'moment-timezone/moment-timezone.js',
 				bowerDir + 'angular-moment/angular-moment.js',
 				bowerDir + 'masonry/dist/masonry.pkgd.js',
-				bowerDir + 'nicescroll/jquery.nicescroll.js',
+				bowerDir + 'nicescroll/dist/jquery.nicescroll.min.js',
 				scriptsDir + 'template.js',
 				angularDir + 'app.js',
 				angularDir + 'controllers/MainController.js',
 				angularDir + 'controllers/NotesListController.js',
 				angularDir + 'controllers/LoginController.js',
 				angularDir + 'controllers/SideMenuController.js',
+				angularDir + 'controllers/BottomController.js',
 				angularDir + 'services/request.js',
 				angularDir + 'services/authSvc.js',
 				angularDir + 'services/userSvc.js',
@@ -100,11 +102,28 @@ module.exports = function(grunt) {
 			}
 		},
 
+		sass: {
+            dist : {
+                files : {
+                    'assets/src/css/main.css' : 'assets/src/sass/main.scss',
+                    'assets/src/css/theme-responsive.css' : 'assets/src/sass/theme-responsive.scss',
+                },
+                options : {
+                    'style': 'compressed',
+                    'precision': '7'
+                },
+            },
+        },
+
 		watch: {
 			scripts: {
 				files: ['assets/src/js/**/*.js', 'assets/src/angular/**/*.js', 'assets/src/views/main.html', 'Gruntfile.js'],
 				tasks: ['dev']
-			}
+			},
+			sass_watch: {
+                files : ['assets/src/sass/**/*.scss'],
+                tasks : ['sass']
+            }
 		},
 		shell: {
 			git_add: {
@@ -184,6 +203,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-targethtml');
 	grunt.loadNpmTasks('grunt-text-replace');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-git');
 	grunt.loadNpmTasks('grunt-prompt');

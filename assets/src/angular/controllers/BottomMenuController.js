@@ -1,4 +1,4 @@
-notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia',
+notes.controller('BottomMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia',
 	function($scope, $rootScope, $location, userSvc, notesSvc, $mdDialog, $mdMedia) {
 
 	$rootScope.$on('auth.checked', function() {
