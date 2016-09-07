@@ -18,6 +18,9 @@ body {
   &.locked-scroll {
     overflow: hidden;
   }
+  &.md-dialog-is-showing {
+    top: 0 !important;
+  }
 }
 
 header {

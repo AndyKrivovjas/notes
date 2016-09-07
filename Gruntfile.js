@@ -44,7 +44,6 @@ module.exports = function(grunt) {
 				angularDir + 'controllers/NotesListController.js',
 				angularDir + 'controllers/LoginController.js',
 				angularDir + 'controllers/SideMenuController.js',
-				angularDir + 'controllers/BottomController.js',
 				angularDir + 'services/request.js',
 				angularDir + 'services/authSvc.js',
 				angularDir + 'services/userSvc.js',
@@ -179,7 +178,7 @@ module.exports = function(grunt) {
 			}
 		}
 	});
-	
+
 	forEach(includes.js, function(settings, position) {
 		if(settings.length) {
 			config.uglify[position] = {

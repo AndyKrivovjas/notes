@@ -1,0 +1,28 @@
+<div class="header">
+  <!-- Dropdown Structure -->
+  <ul id="account" class="dropdown-content">
+    <li><a href="#!">Edit Profile</a></li>
+    <li><a href="#!">Turn offline</a></li>
+    <li><a href="#!">Turn online</a></li>
+    <li class="divider"></li>
+    <li><a (click)="logout()" class="pointer">Logout</a></li>
+  </ul>
+  <nav>
+    <div class="nav-wrapper teal">
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="">Messages</a></li>
+        <li><a href="">Friends</a></li>
+        <li><a href="">Audio</a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <!-- Dropdown Trigger -->
+        <li>
+          <a materialize="dropdown" class="dropdown-button" href="#!" data-activates="account">
+            <img [src]="accountHolder.photo" [alt]="accountHolder.first_name" class="responsive-img circle profile-pic">
+            {{accountHolder.first_name}}<i class="material-icons right">arrow_drop_down</i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
