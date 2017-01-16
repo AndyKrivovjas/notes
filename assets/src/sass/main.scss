@@ -8,7 +8,8 @@
 }
 
 html {
-  overflow-y: scroll;
+  overflow-y: hidden !important;
+  height: auto;
 }
 
 body {
@@ -25,6 +26,29 @@ body {
 
 header {
   z-index: 100;
+}
+
+.header-panel {
+  .mainbar {
+    padding: 0;
+  }
+  md-menu {
+    height: 100%;
+    & > .md-button {
+      padding: 14px;
+      border-radius: 0;
+    }
+  }
+  .menu-filter {
+    .md-button {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.fa.offset {
+  margin-right: 5px;
 }
 
 .login-page .hidden-header {
@@ -51,7 +75,7 @@ a {
 }
 
 .logo img {
-  max-height: 24px;
+  max-height: 42px;
 }
 
 .navbar-brand {
@@ -101,6 +125,10 @@ h1 {
   color: #ffffff;
   font-weight: 300;
   margin: 0 0 40px;
+}
+
+md-dialog {
+  position: absolute;
 }
 
 label {
@@ -229,7 +257,7 @@ textarea {
     color: #FF5B5B;
   }
   .mainbar {
-    background: #1ab188;
+    // background: #1ab188;
   }
 }
 
@@ -262,6 +290,40 @@ textarea {
     background: #212121;
     z-index: 200;
     position: fixed;
+    overflow-x: hidden;
+    md-content {
+      height: calc(100% - 64px);
+      overflow: hidden;
+      .block {
+        max-height: 50%;
+        overflow-y: hidden;
+        position: relative;
+        // padding-top: 45px;
+        // .heading {
+        //   position: absolute;
+        //   top: 0;
+        //   right: 0;
+        //   left: 0;
+        // }
+        .list {
+          height: calc(50vh - 77px - 48px);
+          overflow-y: auto;
+        }
+      }
+    }
+    .md-toolbar-tools {
+      padding: 0;
+      .close-nav {
+        display: block;
+        width: 100%;
+        height: 100%;
+        line-height: 64px;
+        text-align: left;
+        cursor: pointer;
+        padding: 0 15px;
+        margin: 0;
+      }
+    }
   }
   md-content {
     background: #212121;
@@ -269,7 +331,7 @@ textarea {
 }
 
 md-toolbar {
-  background: #0D68B7 !important;
+  //background: #0D68B7 !important;
 }
 
 md-tooltip {
@@ -287,11 +349,12 @@ md-tooltip {
     font-size: 20px;
     line-height: 44px;
     border-bottom: 1px solid rgba(90, 90, 90, 0.48);
+    border-top: 1px solid rgba(90, 90, 90, 0.48);
     padding: 0 12px;
     color: #888;
   }
   .list .item {
-    padding: 7px 20px;
+    padding: 9px 20px;
     font-size: 16px;
     cursor: pointer;
     position: relative;
@@ -301,7 +364,8 @@ md-tooltip {
     transition: all .3s;
     margin: 0;
     &:hover {
-      background: #4EA4EF;
+      // background: #4EA4EF;
+      background: #00897B;
       color: #f1f1f1;
       .action {
         display: block;
@@ -329,6 +393,26 @@ md-tooltip {
 
 .grid-sizer, .grid-item {
   width: 32%;
+
+  .tags-list {
+    width: 100%;
+    .item {
+      font-size: 12px;
+      background: #f1f1f1;
+      border-radius: 3px;
+      display: inline-block;
+      padding: 5px;
+      margin-right: 5px;
+    }
+  }
+}
+
+md-menu-item {
+  md-checkbox {
+    .md-container {
+      left: 20px;
+    }
+  }
 }
 
 .modal-up {
@@ -461,7 +545,8 @@ md-autocomplete-wrap input {
 }
 
 .dot1 {
-  background: #4EA4EF;
+  background: #00897B;
+  // background: #4EA4EF;
   width: 60%;
   height: 60%;
   display: inline-block;
@@ -473,7 +558,7 @@ md-autocomplete-wrap input {
 }
 
 .dot2 {
-  background: #4EA4EF;
+  background: #00897B;
   width: 60%;
   height: 60%;
   display: inline-block;

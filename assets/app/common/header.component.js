@@ -8,20 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_service_1 = require('http.service');
-var AuthService = (function () {
-    function AuthService(http) {
-        this.http = http;
+var core_1 = require("@angular/core");
+var HeaderComponent = (function () {
+    function HeaderComponent() {
     }
-    AuthService.prototype.ping = function () {
+    HeaderComponent.prototype.toggleMenu = function () {
+        console.log('it works!');
     };
-    AuthService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof http_service_1.HttpService !== 'undefined' && http_service_1.HttpService) === 'function' && _a) || Object])
-    ], AuthService);
-    return AuthService;
-    var _a;
+    return HeaderComponent;
 }());
-exports.AuthService = AuthService;
-//# sourceMappingURL=auth.service.js.map
+HeaderComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'header-component',
+        templateUrl: 'header.component.html'
+    }),
+    __metadata("design:paramtypes", [])
+], HeaderComponent);
+exports.HeaderComponent = HeaderComponent;
+//# sourceMappingURL=header.component.js.map

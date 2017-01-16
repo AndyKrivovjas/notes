@@ -21,8 +21,8 @@
   
 	<link type="text/css" rel="stylesheet" href="assets/bower/font-awesome/css/font-awesome.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/bower/angular-material/angular-material.css"/>
-	<link type="text/css" rel="stylesheet" href="assets/src/css/main.css"/>
-	<link type="text/css" rel="stylesheet" href="assets/src/css/theme-responsive.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/dist/css/main.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/dist/css/theme-responsive.css"/>
 	
 	<script type="text/javascript" src="assets/bower/jquery/dist/jquery.js"></script>
 	<script type="text/javascript" src="assets/bower/lodash/dist/lodash.js"></script>
@@ -39,6 +39,7 @@
 
 <body ng-app="notes" ng-controller="MainController" ng-class="bodyClass">
   <!-- Full Body Container -->
+  {% verbatim %}
   <div id="container">
 
     <div id="loader" class="loaderh">
@@ -49,7 +50,7 @@
     </div>
 
     <div class="hidden-header"></div>
-    <md-toolbar md-scroll-shrink class="toolbar">
+    <md-toolbar md-scroll-shrink class="toolbar md-primary header-panel">
       <div class="md-toolbar-tools mainbar">
         <h2>
           <a class="navbar-brand logo" href="/">
@@ -57,9 +58,46 @@
           </a>
         </h2>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More" ng-if="name!='login'" ng-click="toggleRight()">
-          <i class="fa fa-navicon"></i>
-        </md-button>
+
+        <div ng-if="name!='login'">
+
+          <!-- <md-menu md-offset="0 76" class="menu-filter">
+            <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+              <i class="fa fa-filter"></i>
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item ng-repeat="tag in data.tags |
+                filter:searchTerm">
+                <md-checkbox ng-value="vegetable">{{tag.name}}</md-checkbox>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu> -->
+
+          <md-button class="md-icon-button" aria-label="More"  ng-click="toggleRight()">
+            <i class="fa fa-th-list"></i>
+          </md-button>
+
+          <md-menu md-offset="0 73">
+            <md-button class="md-button" ng-click="openMenu($mdOpenMenu, $event)">
+              <i class="fa fa-user-o offset"></i> {{data.user.display_name}}
+            </md-button>
+            <md-menu-content width="4">
+              <md-menu-item>
+                <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+                  <i class="fa fa-vcard-o offset"></i>
+                  Edit Profile
+                </md-button>
+              </md-menu-item>
+              <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-button ng-click="logout()">
+                  <i class="fa fa-unlock-alt offset"></i>
+                  Logout
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
       </div>
     </md-toolbar>
 
@@ -69,6 +107,7 @@
     <div ng-view></div>
 
   </div>
+  {% endverbatim %}
   <!-- End Full Body Container -->
 
   <!-- Go To Top Link -->

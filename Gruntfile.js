@@ -6,7 +6,7 @@ module.exports = function(grunt) {
 	var assetsDir 	= 'assets/';
 	var bowerDir 	= assetsDir + 'bower/';
 	var distDir 	= assetsDir + 'dist/';
-	var stylesDir 	= assetsDir + 'src/css/';
+	var stylesDir 	= assetsDir + 'dist/css/';
 	var sassDir 	= assetsDir + 'src/sass/';
 	var scriptsDir 	= assetsDir + 'src/js/';
 	var angularDir 	= assetsDir + 'src/angular/';
@@ -104,8 +104,8 @@ module.exports = function(grunt) {
 		sass: {
             dist : {
                 files : {
-                    'assets/src/css/main.css' : 'assets/src/sass/main.scss',
-                    'assets/src/css/theme-responsive.css' : 'assets/src/sass/theme-responsive.scss',
+                    'assets/dist/css/main.css' : 'assets/src/sass/main.scss',
+                    'assets/dist/css/theme-responsive.css' : 'assets/src/sass/theme-responsive.scss',
                 },
                 options : {
                     'style': 'compressed',

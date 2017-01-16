@@ -1,4 +1,4 @@
-notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'userSvc', 'authSvc', 'notesSvc', '$mdSidenav', '$log',  
+notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'userSvc', 'authSvc', 'notesSvc', '$mdSidenav', '$log',
 	function($scope, $rootScope, $routeParams, $window, $location, userSvc, authSvc, notesSvc, $mdSidenav, $log){
 
 	$scope.isTouch = 'ontouchstart' in document.documentElement;
@@ -63,7 +63,12 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 		$location.path('/login');
 	}
 
-	$scope.toggleRight = buildToggler('right');
+	$rootScope.toggleRight = buildToggler('right');
+
+	$scope.openMenu = function($mdOpenMenu, ev) {
+    originatorEv = ev;
+    $mdOpenMenu(ev);
+  };
 
 	function buildToggler(navID) {
 	  return function() {

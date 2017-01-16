@@ -1,9 +1,21 @@
-notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia',
-	function($scope, $rootScope, $location, userSvc, notesSvc, $mdDialog, $mdMedia) {
+notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia', '$timeout',
+	function($scope, $rootScope, $location, userSvc, notesSvc, $mdDialog, $mdMedia, $timeout) {
 
 	$rootScope.$on('auth.checked', function() {
-		
-	})
+
+	});
+
+	$(".block .list").niceScroll({
+		scrollspeed: 100,
+		mousescrollstep: 38,
+		cursorwidth: 5,
+		cursorborder: 0,
+		cursorcolor: '#333',
+		autohidemode: true,
+		zindex: 999999999,
+		horizrailenabled: false,
+		cursorborderradius: 0,
+	});
 
 	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  || $scope.customFullscreen;
 	$scope.$watch(function() {
@@ -13,6 +25,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 	});
 
 	$scope.removeCategory = function(ev, ind, category) {
+		ev.stopPropagation();
 		var confirm = $mdDialog.confirm()
 			.title('Would you like to delete "' + category.name + '"?')
 			.textContent('The category will be deleted permanently.')
@@ -24,11 +37,12 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 				$rootScope.data.categories.splice(ind, 1);
 			});
 		}, function() {
-		  
+
 		});
 	};
 
 	$scope.removeTag = function(ev, ind, tag) {
+		ev.stopPropagation();
 		var confirm = $mdDialog.confirm()
 			.title('Would you like to delete "' + tag.name + '"?')
 			.textContent('The tag will be deleted permanently.')
@@ -40,11 +54,13 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 				$rootScope.data.tags.splice(ind, 1);
 			});
 		}, function() {
-		  
+
 		});
 	};
 
 	$scope.tagAlert = function(ev, ind, action, tag) {
+		ev.stopPropagation();
+
 		var alertScope = {};
 		alertScope.action = action;
 
@@ -78,18 +94,33 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			$mdDialog.cancel();
 		};
 
+		alertScope.applyScroll = function() {
+			$timeout(function() {
+				$("md-dialog-content").niceScroll({
+					scrollspeed: 100,
+					mousescrollstep: 38,
+					cursorwidth: 5,
+					cursorborder: 0,
+					cursorcolor: '#333',
+					autohidemode: true,
+					zindex: 999999999,
+					horizrailenabled: false,
+					cursorborderradius: 0,
+				});
+			}, 0);
+		}
+
 		alertScope.dialog = $mdDialog.show({
 			templateUrl: 'assets/src/views/templates/form/tag-form.html',
 			parent: angular.element(document.body),
 			locals: { data: alertScope },
-			controller: ['$scope', 'data', function($scope, data) { 
+			controller: ['$scope', 'data', function($scope, data) {
 				angular.extend($scope, data);
 			}],
 			targetEvent: ev,
 			clickOutsideToClose:true,
 			fullscreen: useFullScreen
 		});
-		
 	};
 
 	$scope.categoryAlert = function(ev, ind, action, category) {
@@ -97,6 +128,22 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 
 		alertScope = angular.copy($rootScope.data);
 		alertScope.action = action;
+
+		alertScope.applyScroll = function() {
+			$timeout(function() {
+				$("md-dialog-content").niceScroll({
+					scrollspeed: 100,
+					mousescrollstep: 38,
+					cursorwidth: 5,
+					cursorborder: 0,
+					cursorcolor: '#333',
+					autohidemode: true,
+					zindex: 999999999,
+					horizrailenabled: false,
+					cursorborderradius: 0,
+				});
+			}, 0);
+		}
 
 		if(action == 'edit') {
 			alertScope.category = category;
@@ -133,7 +180,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			templateUrl: 'assets/src/views/templates/form/category-form.html',
 			parent: angular.element(document.body),
 			locals: { data: alertScope },
-			controller: ['$scope', 'data', function($scope, data) { 
+			controller: ['$scope', 'data', function($scope, data) {
 				angular.extend($scope, data);
 			}],
 			targetEvent: ev,

@@ -1,18 +1,15 @@
 <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
-  <md-toolbar class="md-theme-light">
-    <h1 class="md-toolbar-tools">Get Started</h1>
+  <md-toolbar class="md-theme-light md-warn">
+    <h1 class="md-toolbar-tools">
+      <md-button class="close-nav md-ink-ripple" ng-click="toggleRight()">
+        Close
+        <div class="pull-right"><i class="fa fa-chevron-right"></i></div>
+      </md-button>
+    </h1>
   </md-toolbar>
   <md-content ng-controller="SideMenuController">
-    <div class="wrapper">
-		<div class="user-info block">
-			<div class="heading"><i class="fa fa-user"></i> User</div>
-			<div class="list">
-				<p class="item">{{data.user.display_name}}</p>
-				<p class="item" ng-click="logout()">Logout</p>
-			</div>
-		</div>
 		<div class="tags block">
-			<div class="heading"><i class="fa fa-tag"></i> Tags</div>
+			<div class="heading md-primary"><i class="fa fa-tag offset"></i> Tag</div>
 			<div class="list">
 				<div class="tag-list">
 					<div class="item" ng-repeat="tag in data.tags">
@@ -29,11 +26,12 @@
 						</span>
 					</div>
 				</div>
-				<p class="item" ng-click="tagAlert($event, $index, 'add')"><i class="fa fa-plus"></i> Create new</p>
 			</div>
+      <md-button md-theme="teal-theme" class="md-warn md-raised pull-left" ng-click="tagAlert($event, $index, 'add')">Clear Filter</md-button>
+      <md-button md-theme="teal-theme" class="md-primary md-raised pull-right" ng-click="tagAlert($event, $index, 'add')">Add</md-button>
 		</div>
 		<div class="categories block">
-			<div class="heading"><i class="fa fa-map"></i> Categories</div>
+			<div class="heading"><i class="fa fa-link offset"></i> Category</div>
 			<div class="list">
 				<div class="category-list">
 					<div class="item" ng-repeat="category in data.categories">
@@ -50,8 +48,8 @@
 						</span>
 					</div>
 				</div>
-				<p class="item" ng-click="categoryAlert($event, $index, 'add')"><i class="fa fa-plus"></i> Create new</p>
 			</div>
+      <md-button md-theme="teal-theme" class="md-primary md-raised pull-right" ng-click="categoryAlert($event, $index, 'add')">Add</md-button>
 		</div>
 	</div>
   </md-content>

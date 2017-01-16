@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AA8BA,yCAA0C,CACxC,mBAAoB,CAClB,SAAS,CAAE,KAAK,EAKpB,yCAA0C,CACxC,mBAAoB,CAClB,SAAS,CAAE,IAAI,EAKnB,yCAA0C,CACxC,mBAAoB,CAClB,SAAS,CAAE,IAAI,EASnB,oCAAqC,CACnC,sBAAwB,CACtB,KAAK,CAAE,GAAG,EAId,oCAAqC,CACnC,sBAAwB,CACtB,KAAK,CAAE,IAAI",
-"sources": ["../sass/theme-responsive.scss"],
-"names": [],
-"file": "theme-responsive.css"
-}

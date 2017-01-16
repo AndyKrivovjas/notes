@@ -17,6 +17,9 @@
           Edited: <span>{{note.date_modified | amDateFormat:'D MMM h:mma'}}</span>
         </div>
         <md-card-actions layout="row" layout-align="end center">
+          <div class="tags-list">
+            <div class="item" ng-repeat="tag in note.tags">{{tag.name}}</div>
+          </div>
           <md-button class="md-icon-button" ng-click="noteAlert($event, $index, 'edit', note)">
             <i class="fa fa-pencil"></i>
             <md-tooltip md-direction="left">Edit</md-tooltip>
@@ -30,7 +33,7 @@
     </div>
   </div>
   <div class="bottom-actions">
-    <md-button aria-label="menu" class="md-fab md-warn add-note" ng-click="noteAlert($event, $index, 'add')">
+    <md-button aria-label="menu" class="md-fab md-primary add-note" ng-click="noteAlert($event, $index, 'add')">
       <i class="fa fa-plus"></i>
     </md-button>
   </div>

@@ -1,12 +1,12 @@
 /* ----------------- Start JS Document ----------------- */
 
 $(document).ready(function ($) {
-	"use strict";	
-	
+	"use strict";
+
 	/*----------------------------------------------------*/
 	/*	Nice-Scroll
 	/*----------------------------------------------------*/
-	
+
 	$("html").niceScroll({
 		scrollspeed: 100,
 		mousescrollstep: 38,
@@ -18,11 +18,11 @@ $(document).ready(function ($) {
 		horizrailenabled: false,
 		cursorborderradius: 0,
 	});
-				
+
 	/*----------------------------------------------------*/
 	/*	Back Top Link
 	/*----------------------------------------------------*/
-	
+
     var offset = 200;
     var duration = 500;
     $(window).scroll(function() {

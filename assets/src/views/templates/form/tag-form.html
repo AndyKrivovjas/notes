@@ -5,7 +5,7 @@
         <h2>{{title}}</h2>
       </div>
     </md-toolbar>
-    <md-dialog-content>
+    <md-dialog-content ng-init="applyScroll()">
       <div class="md-dialog-content">
         <md-input-container class="md-block" flex-gt-sm>
           <label>Name</label>
@@ -22,12 +22,14 @@
         </md-tooltip>
       </md-button>
       <span flex></span>
-      <md-button class="md-raised" ng-click="cancel()">
-        Cancel
-      </md-button>
-      <md-button class="md-raised md-primary" ng-click="save(tag)">
-        Save
-      </md-button>
+      <div md-theme="teal-theme">
+        <md-button class="md-raised" ng-click="cancel()">
+          Cancel
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="save(tag)">
+          Save
+        </md-button>
+      </div>
     </md-dialog-actions>
   </form>
 </md-dialog>

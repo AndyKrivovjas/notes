@@ -1,11 +1,11 @@
-<md-dialog ng-cloak class="modal-up">
+<md-dialog ng-cloak class="modal-up" ng-attr-id="{{dialogID}}">
   <form>
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2>{{title}}</h2>
       </div>
     </md-toolbar>
-    <md-dialog-content>
+    <md-dialog-content ng-init="applyScroll()">
       <div class="md-dialog-content">
         <input type="hidden" ng-model="note.id">
         <md-input-container class="md-block" flex-gt-sm>
@@ -24,7 +24,7 @@
           <label>Description</label>
           <textarea ng-model="note.text"></textarea>
         </md-input-container>
-        <md-chips ng-model="note.tags" 
+        <md-chips ng-model="note.tags"
           md-autocomplete-snap
           md-require-match="true">
           <md-autocomplete
@@ -47,14 +47,14 @@
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row">
-      <md-button class="remove-entity" ng-click="removeNote(note)" ng-if="action=='edit'">
+      <md-button class="remove-entity md-icon-button" ng-click="removeNote(note)" ng-if="action=='edit'">
         <i class="fa fa-trash"></i>
         <md-tooltip md-direction="bottom">
           Delete
         </md-tooltip>
       </md-button>
       <md-menu>
-        <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
+        <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
           <i class="fa fa-paint-brush"></i>
           <md-tooltip md-direction="bottom">
             Color
@@ -72,12 +72,14 @@
         </md-menu-content>
       </md-menu>
       <span flex></span>
-      <md-button class="md-raised" ng-click="cancel()">
-        Cancel
-      </md-button>
-      <md-button class="md-raised md-primary" ng-click="save(note)">
-        Save
-      </md-button>
+      <div md-theme="teal-theme">
+        <md-button class="md-raised" ng-click="cancel()">
+          Cancel
+        </md-button>
+        <md-button class="md-raised md-primary" ng-click="save(note)">
+          Save
+        </md-button>
+      </div>
     </md-dialog-actions>
   </form>
 </md-dialog>

@@ -53,9 +53,12 @@ var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment'])
 	  });
 
 	$mdThemingProvider.theme('default')
-    	.primaryPalette('teal')
+    	.primaryPalette('blue-grey')
     	.warnPalette('danger')
-    	.accentPalette('light-blue');
+    	.accentPalette('red');
+
+	$mdThemingProvider.theme('teal-theme')
+		    	.primaryPalette('teal');
 
 }]).run(['$rootScope', 'amMoment', function($rootScope, amMoment) {
 
@@ -67,7 +70,7 @@ var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment'])
 	]);
 
 	$rootScope.page = {
-		title: 'Notes',
+		title: 'Noty',
 		name: 'notes',
 		setTitle: function(title) {
 			this.title = title;
