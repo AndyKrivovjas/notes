@@ -1,4 +1,4 @@
-notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope) {
+notes.directive("masonry", ['$parse', '$rootScope', '$timeout', function($parse, $rootScope, $timeout) {
   return {
     restrict: 'AC',
     controller: ['$scope', '$element', function($scope, $element){
@@ -13,16 +13,19 @@ notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope)
       $scope.$watch(function(){
         return bricks
       },function(){
-        $element.masonry('reloadItems');
+        $timeout(function() {
+          $element.masonry('reloadItems').masonry('layout');
+        });
       },true);
+
     }],
     link: function (scope, elem, attrs) {
       elem.masonry({ itemSelector: '.masonry-brick'});
       $rootScope.$on('ngRepeatFinished.data.notes', function() {
         elem.masonry({ itemSelector: '.masonry-brick'});
-      })
+      });
     }
-  };     
+  };
 }])
 .directive('masonryBrick', ['$compile', '$rootScope', function ($compile, $rootScope) {
   return {
@@ -30,7 +33,7 @@ notes.directive("masonry", ['$parse', '$rootScope', function($parse, $rootScope)
     require:'^masonry',
     link: function (scope, elem, attrs,ctrl) {
       ctrl.addBrick(scope.$id);
-      
+
       scope.$on('$destroy',function(){
         ctrl.removeBrick(scope.$id);
       });

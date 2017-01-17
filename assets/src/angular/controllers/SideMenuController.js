@@ -1,5 +1,5 @@
-notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia', '$timeout',
-	function($scope, $rootScope, $location, userSvc, notesSvc, $mdDialog, $mdMedia, $timeout) {
+notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'userSvc', 'notesSvc', '$mdDialog', '$mdMedia', '$timeout', 'dialogSvc',
+	function($scope, $rootScope, $location, userSvc, notesSvc, $mdDialog, $mdMedia, $timeout, dialogSvc) {
 
 	$rootScope.$on('auth.checked', function() {
 
@@ -90,60 +90,13 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			}
 		}
 
-		alertScope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		alertScope.applyScroll = function() {
-			$timeout(function() {
-				$("md-dialog-content").niceScroll({
-					scrollspeed: 100,
-					mousescrollstep: 38,
-					cursorwidth: 5,
-					cursorborder: 0,
-					cursorcolor: '#333',
-					autohidemode: true,
-					zindex: 999999999,
-					horizrailenabled: false,
-					cursorborderradius: 0,
-				});
-			}, 0);
-		}
-
-		alertScope.dialog = $mdDialog.show({
-			templateUrl: 'assets/src/views/templates/form/tag-form.html',
-			parent: angular.element(document.body),
-			locals: { data: alertScope },
-			controller: ['$scope', 'data', function($scope, data) {
-				angular.extend($scope, data);
-			}],
-			targetEvent: ev,
-			clickOutsideToClose:true,
-			fullscreen: useFullScreen
-		});
+		dialogSvc.dialog(ev, alertScope, 'assets/src/views/templates/form/tag-form.html', useFullScreen);
 	};
 
 	$scope.categoryAlert = function(ev, ind, action, category) {
 		var alertScope = {};
 
 		alertScope = angular.copy($rootScope.data);
-		alertScope.action = action;
-
-		alertScope.applyScroll = function() {
-			$timeout(function() {
-				$("md-dialog-content").niceScroll({
-					scrollspeed: 100,
-					mousescrollstep: 38,
-					cursorwidth: 5,
-					cursorborder: 0,
-					cursorcolor: '#333',
-					autohidemode: true,
-					zindex: 999999999,
-					horizrailenabled: false,
-					cursorborderradius: 0,
-				});
-			}, 0);
-		}
 
 		if(action == 'edit') {
 			alertScope.category = category;
@@ -172,21 +125,7 @@ notes.controller('SideMenuController', ['$scope', '$rootScope', '$location', 'us
 			}
 		}
 
-		alertScope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		alertScope.dialog = $mdDialog.show({
-			templateUrl: 'assets/src/views/templates/form/category-form.html',
-			parent: angular.element(document.body),
-			locals: { data: alertScope },
-			controller: ['$scope', 'data', function($scope, data) {
-				angular.extend($scope, data);
-			}],
-			targetEvent: ev,
-			clickOutsideToClose:true,
-			fullscreen: useFullScreen
-		});
+		dialogSvc.dialog(ev, alertScope, 'assets/src/views/templates/form/category-form.html', useFullScreen);
 	};
 
 }]);

@@ -1,5 +1,5 @@
-notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'notesSvc', '$mdDialog', '$mdBottomSheet', '$mdMedia', '$timeout',
-	function($scope, $rootScope, $routeParams, $window, $location, notesSvc, $mdDialog, $mdBottomSheet, $mdMedia, $timeout){
+notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'notesSvc', '$mdDialog', '$mdBottomSheet', '$mdMedia', '$timeout', 'dialogSvc',
+	function($scope, $rootScope, $routeParams, $window, $location, notesSvc, $mdDialog, $mdBottomSheet, $mdMedia, $timeout, dialogSvc){
 
 	var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  || $scope.customFullscreen;
 	$scope.$watch(function() {
@@ -7,6 +7,28 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 	}, function(wantsFullScreen) {
 		$scope.customFullscreen = (wantsFullScreen === true);
 	});
+
+	$scope.filterNotes = function(item) {
+		if(window.localStorage.filter_tag != "null") {
+			if(_.findIndex(item.tags, function(tag) { return tag.name == window.localStorage.filter_tag; }) != -1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	$rootScope.clearFilter = function() {
+		window.localStorage.filter_tag = null;
+		$rootScope.toggleRight();
+	}
+
+	$rootScope.setFilter = function(tag) {
+		window.localStorage.filter_tag = tag;
+		$rootScope.toggleRight();
+	}
 
 	$scope.removeNote = function(ev, ind, note) {
 		var confirm = $mdDialog.confirm()
@@ -84,85 +106,25 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 			}
 		}
 
-		alertScope.querySearch = function(query) {
-			var results = query ? alertScope.tags.filter(createFilterFor(query)) : alertScope.tags,
-			deferred;
-			if (alertScope.simulateQuery) {
-				deferred = $q.defer();
-				$timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-					return deferred.promise;
-			} else {
-				return results;
-			}
-		}
+		// alertScope.querySearch = function(query) {
+		// 	var results = query ? alertScope.tags.filter(createFilterFor(query)) : alertScope.tags,
+		// 	deferred;
+		// 	if (alertScope.simulateQuery) {
+		// 		deferred = $q.defer();
+		// 		$timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+		// 			return deferred.promise;
+		// 	} else {
+		// 		return results;
+		// 	}
+		// }
+		//
+		// function createFilterFor(query) {
+		// 	var lowercaseQuery = angular.lowercase(query);
+		// 	return function filterFn(state) {
+		// 		return (state.value.indexOf(lowercaseQuery) === 0);
+		// 	};
+		// }
 
-		function createFilterFor(query) {
-			var lowercaseQuery = angular.lowercase(query);
-			return function filterFn(state) {
-				return (state.value.indexOf(lowercaseQuery) === 0);
-			};
-		}
-
-		alertScope.cancel = function() {
-			$mdDialog.cancel();
-		};
-
-		alertScope.dialogID = "dialog" + Math.random().toString().slice(2,11);
-		alertScope.centerDialog = function() {
-			$timeout(function() {
-				var css = {};
-				var top = $(document).scrollTop();
-				var windowHeight = $(window).height();
-				var documentHeight = $(document).height();
-				var dialogHeight = $('#' + alertScope.dialogID).height();
-
-				if(dialogHeight < windowHeight) {
-					top += (windowHeight - dialogHeight) / 2;
-				}
-
-				console.log(top);
-
-				if(documentHeight < (top + dialogHeight)) {
-					css = {
-						bottom: '0px'
-					};
-				} else {
-					css = {
-						top: top + 'px'
-					};
-				}
-				$('#' + alertScope.dialogID).css(css);
-			}, 0);
-		}
-
-		alertScope.applyScroll = function() {
-			$timeout(function() {
-				$('#' + alertScope.dialogID).find("md-dialog-content").niceScroll({
-					scrollspeed: 100,
-					mousescrollstep: 38,
-					cursorwidth: 5,
-					cursorborder: 0,
-					cursorcolor: '#333',
-					autohidemode: true,
-					zindex: 999999999,
-					horizrailenabled: false,
-					cursorborderradius: 0,
-				});
-
-				alertScope.centerDialog();
-			}, 0);
-		}
-
-		$mdDialog.show({
-			templateUrl: 'assets/src/views/templates/form/note-form.html',
-			parent: angular.element(document.body),
-			locals: { data: alertScope },
-			controller: ['$scope', 'data', function($scope, data) {
-				angular.extend($scope, data);
-			}],
-			targetEvent: ev,
-			clickOutsideToClose:true,
-			fullscreen: useFullScreen
-		});
+		dialogSvc.dialog(ev, alertScope, 'assets/src/views/templates/form/note-form.html', useFullScreen);
 	};
 }]);

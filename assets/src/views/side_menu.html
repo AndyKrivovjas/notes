@@ -12,7 +12,7 @@
 			<div class="heading md-primary"><i class="fa fa-tag offset"></i> Tag</div>
 			<div class="list">
 				<div class="tag-list">
-					<div class="item" ng-repeat="tag in data.tags">
+					<div class="item" ng-repeat="tag in data.tags" ng-click="setFilter(tag.name)" ng-class="{'active': tag.name == filter_tag}">
 						{{tag.name}}
 						<span class="pull-right actions">
 							<span class="edit">
@@ -27,7 +27,7 @@
 					</div>
 				</div>
 			</div>
-      <md-button md-theme="teal-theme" class="md-warn md-raised pull-left" ng-click="tagAlert($event, $index, 'add')">Clear Filter</md-button>
+      <md-button md-theme="teal-theme" class="md-warn md-raised pull-left" ng-click="clearFilter()">Clear Filter</md-button>
       <md-button md-theme="teal-theme" class="md-primary md-raised pull-right" ng-click="tagAlert($event, $index, 'add')">Add</md-button>
 		</div>
 		<div class="categories block">

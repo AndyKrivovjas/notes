@@ -48,6 +48,7 @@ module.exports = function(grunt) {
 				angularDir + 'services/authSvc.js',
 				angularDir + 'services/userSvc.js',
 				angularDir + 'services/notesSvc.js',
+				angularDir + 'services/dialogSvc.js',
 				angularDir + 'directives/loader.js',
 				angularDir + 'directives/masonry.js',
 				angularDir + 'directives/finish-render.js',

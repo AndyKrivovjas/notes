@@ -1,7 +1,7 @@
 <md-content class="md-padding notes-content" layout-xs="column" layout="row">
   <div class='notes-list masonry' flex>
     <div class="grid-sizer"/>
-    <div class="grid-item masonry-brick" ng-repeat="note in data.notes track by note.id" on-finish-render="data.notes">
+    <div class="grid-item masonry-brick" ng-repeat="note in data.notes | filter:filterNotes track by note.id" on-finish-render="data.notes">
       <md-card style="background-color: {{note.color.value}};">
         <md-card-title>
           <md-card-title-text>
@@ -30,6 +30,9 @@
           </md-button>
         </md-card-actions>
       </md-card>
+    </div>
+    <div class="empty" ng-if="(data.notes |filter:filterNotes).length == 0">
+      There is no entries yet.
     </div>
   </div>
   <div class="bottom-actions">
