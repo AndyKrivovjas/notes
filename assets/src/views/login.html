@@ -6,7 +6,7 @@
 	</ul>
 
 	<div class="tab-content">
-		<div id="login">   
+		<div id="login">
 			<h1>Welcome Back!</h1>
 
 			<form action="/" ng-submit="login($event, signin)">
@@ -22,7 +22,7 @@
 					<p ng-repeat="error in errors.signin.password" class="error">{{error}}</p>
 				</div>
 				<p ng-repeat="error in errors.signin.general" class="error">{{error}}</p>
-				<p class="forgot"><a href="#">Forgot Password?</a></p>
+				<p class="forgot"><a href="#" ng-click="forgotten($event)">Forgot Password?</a></p>
 
 				<button class="button button-block">Log In</button>
 				<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
@@ -32,9 +32,9 @@
 
 		</div>
 
-		<div id="signup">   
+		<div id="signup">
 			<h1>Sign Up for Free</h1>
-			
+
 			<form action="/" ng-submit="register($event, signup)">
 				<div class="top-row">
 					<div class="field-wrap">

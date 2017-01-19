@@ -1,7 +1,14 @@
-notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'userSvc', 'authSvc', 'notesSvc', '$mdSidenav', '$log',
-	function($scope, $rootScope, $routeParams, $window, $location, userSvc, authSvc, notesSvc, $mdSidenav, $log){
+notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$window', '$location', 'userSvc', 'authSvc', 'notesSvc', '$mdSidenav', '$log', 'ngProgressFactory', '$timeout',
+	function($scope, $rootScope, $routeParams, $window, $location, userSvc, authSvc, notesSvc, $mdSidenav, $log, ngProgressFactory, $timeout){
 
 	$scope.isTouch = 'ontouchstart' in document.documentElement;
+
+	$scope.$on('$routeChangeStart', function(next, current) {
+		$scope.progressbar = ngProgressFactory.createInstance();
+  	$scope.progressbar.setColor('rgb(213, 0, 0)');
+  	$scope.progressbar.setHeight('2px');
+  	$scope.progressbar.start();
+ 	});
 
 	$scope.$on('$viewContentLoaded', function () {
 
@@ -23,7 +30,15 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 				}
 			});
 		}
+
+		$timeout(function() {
+			$scope.progressbar.complete();
+		}, 1000);
 	});
+
+	$rootScope.locate = function(link) {
+		$location.path(link);
+	}
 
 	$scope.main = function() {
 		$rootScope.$broadcast('auth.checked');

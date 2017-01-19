@@ -1,4 +1,4 @@
-var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment'])
+var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment', 'ngProgress'])
 .config(['$routeProvider', '$locationProvider', '$httpProvider', '$mdThemingProvider', function ($routeProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
 	$routeProvider.when('/404', {
 		title: 'Page not found',
@@ -6,10 +6,16 @@ var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment'])
 		controller: 'NotFoundController'
 	})
 	.when('/login', {
-		title: 'Login Page',
+		title: 'Login',
 		page: 'login',
 		templateUrl: './assets/src/views/login.html',
 		controller: 'LoginController'
+	})
+	.when('/profile/edit', {
+		title: 'Profile Edit',
+		page: 'profileEdit',
+		templateUrl: './assets/src/views/templates/form/profile-edit-form.html',
+		controller: 'ProfileEditController'
 	})
 	.when('/', {
 		title: 'Notes',

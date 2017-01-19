@@ -207,5 +207,13 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # Don't complain about leading slashes in URL patterns
 SILENCED_SYSTEM_CHECKS = ['urls.W002']
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'Server <server@whatever.com>'
+
 # !!!!!This is for demonstration only!!!!!
 #AUTHENTICATION_BACKENDS = ['app.api.auth.AlwaysRootBackend']

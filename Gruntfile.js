@@ -16,6 +16,7 @@ module.exports = function(grunt) {
 			header: [
 				bowerDir + 'font-awesome/css/font-awesome.css',
 				bowerDir + 'angular-material/angular-material.css',
+				bowerDir + 'ngprogress/ngProgress.css',
 				stylesDir + 'main.css',
 				stylesDir + 'theme-responsive.css',
 			],
@@ -33,6 +34,7 @@ module.exports = function(grunt) {
 				bowerDir + 'angular-aria/angular-aria.js',
 				bowerDir + 'angular-messages/angular-messages.js',
 				bowerDir + 'angular-material/angular-material.js',
+				bowerDir + 'ngprogress/build/ngprogress.min.js',
 				bowerDir + 'moment/min/moment-with-locales.js',
 				bowerDir + 'moment-timezone/moment-timezone.js',
 				bowerDir + 'angular-moment/angular-moment.js',
@@ -43,6 +45,7 @@ module.exports = function(grunt) {
 				angularDir + 'controllers/MainController.js',
 				angularDir + 'controllers/NotesListController.js',
 				angularDir + 'controllers/LoginController.js',
+				angularDir + 'controllers/ProfileEditController.js',
 				angularDir + 'controllers/SideMenuController.js',
 				angularDir + 'services/request.js',
 				angularDir + 'services/authSvc.js',

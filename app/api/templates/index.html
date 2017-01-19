@@ -7,6 +7,7 @@
 
   <!-- Basic -->
   <title>Home</title>
+  <base href="/">
 
   <!-- Define Charset -->
   <meta charset="utf-8">
@@ -18,9 +19,12 @@
   <meta name="description" content="Notes">
   <meta name="author" content="Andy">
 
+  <link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400" rel="stylesheet">
+
   
 	<link type="text/css" rel="stylesheet" href="assets/bower/font-awesome/css/font-awesome.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/bower/angular-material/angular-material.css"/>
+	<link type="text/css" rel="stylesheet" href="assets/bower/ngprogress/ngProgress.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/dist/css/main.css"/>
 	<link type="text/css" rel="stylesheet" href="assets/dist/css/theme-responsive.css"/>
 	
@@ -50,7 +54,7 @@
     </div>
 
     <div class="hidden-header"></div>
-    <md-toolbar md-scroll-shrink class="toolbar md-primary header-panel">
+    <md-toolbar md-scroll-shrink class="toolbar main-toolbar md-primary header-panel">
       <div class="md-toolbar-tools mainbar">
         <h2>
           <a class="navbar-brand logo" href="/">
@@ -61,34 +65,28 @@
 
         <div ng-if="name!='login'">
 
-          <!-- <md-menu md-offset="0 76" class="menu-filter">
-            <md-button class="md-icon-button" ng-click="openMenu($mdOpenMenu, $event)">
-              <i class="fa fa-filter"></i>
-            </md-button>
-            <md-menu-content width="4">
-              <md-menu-item ng-repeat="tag in data.tags |
-                filter:searchTerm">
-                <md-checkbox ng-value="vegetable">{{tag.name}}</md-checkbox>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu> -->
-
           <md-button class="md-icon-button" aria-label="More"  ng-click="toggleRight()">
             <i class="fa fa-th-list"></i>
           </md-button>
 
-          <md-menu md-offset="0 73">
+          <md-menu md-offset="0 64">
             <md-button class="md-button" ng-click="openMenu($mdOpenMenu, $event)">
               <i class="fa fa-user-o offset"></i> {{data.user.display_name}}
             </md-button>
-            <md-menu-content width="4">
+            <md-menu-content class="no-padding" width="4">
               <md-menu-item>
-                <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+                <md-button ng-click="locate('/profile/edit')">
                   <i class="fa fa-vcard-o offset"></i>
                   Edit Profile
                 </md-button>
               </md-menu-item>
-              <md-menu-divider></md-menu-divider>
+              <md-menu-item>
+                <md-button ng-click="locate('/')">
+                  <i class="fa fa-calendar-check-o offset"></i>
+                  My notes
+                </md-button>
+              </md-menu-item>
+              <md-menu-divider class="no-margin"></md-menu-divider>
               <md-menu-item>
                 <md-button ng-click="logout()">
                   <i class="fa fa-unlock-alt offset"></i>
@@ -121,6 +119,7 @@
 	<script type="text/javascript" src="assets/bower/angular-aria/angular-aria.js"></script>
 	<script type="text/javascript" src="assets/bower/angular-messages/angular-messages.js"></script>
 	<script type="text/javascript" src="assets/bower/angular-material/angular-material.js"></script>
+	<script type="text/javascript" src="assets/bower/ngprogress/build/ngprogress.min.js"></script>
 	<script type="text/javascript" src="assets/bower/moment/min/moment-with-locales.js"></script>
 	<script type="text/javascript" src="assets/bower/moment-timezone/moment-timezone.js"></script>
 	<script type="text/javascript" src="assets/bower/angular-moment/angular-moment.js"></script>
@@ -131,6 +130,7 @@
 	<script type="text/javascript" src="assets/src/angular/controllers/MainController.js"></script>
 	<script type="text/javascript" src="assets/src/angular/controllers/NotesListController.js"></script>
 	<script type="text/javascript" src="assets/src/angular/controllers/LoginController.js"></script>
+	<script type="text/javascript" src="assets/src/angular/controllers/ProfileEditController.js"></script>
 	<script type="text/javascript" src="assets/src/angular/controllers/SideMenuController.js"></script>
 	<script type="text/javascript" src="assets/src/angular/services/request.js"></script>
 	<script type="text/javascript" src="assets/src/angular/services/authSvc.js"></script>

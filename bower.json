@@ -15,7 +15,8 @@
         "masonry": "latest",
         "nicescroll": "latest",
         "lodash": "latest",
-        "font-awesome": "latest"
+        "font-awesome": "latest",
+        "ngprogress": "latest"
     },
     "private": true
 }

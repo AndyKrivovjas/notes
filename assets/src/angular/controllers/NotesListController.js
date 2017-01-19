@@ -8,6 +8,7 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 		$scope.customFullscreen = (wantsFullScreen === true);
 	});
 
+	$rootScope.filter_tag = window.localStorage.filter_tag;
 	$scope.filterNotes = function(item) {
 		if(window.localStorage.filter_tag != "null") {
 			if(_.findIndex(item.tags, function(tag) { return tag.name == window.localStorage.filter_tag; }) != -1) {
@@ -20,12 +21,18 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 		return true;
 	}
 
+	$rootScope.$on('notes.loaded', function() {
+		$scope.empty_notes_list = true;
+	});
+
 	$rootScope.clearFilter = function() {
+		$rootScope.filter_tag = null;
 		window.localStorage.filter_tag = null;
 		$rootScope.toggleRight();
 	}
 
 	$rootScope.setFilter = function(tag) {
+		$rootScope.filter_tag = tag;
 		window.localStorage.filter_tag = tag;
 		$rootScope.toggleRight();
 	}

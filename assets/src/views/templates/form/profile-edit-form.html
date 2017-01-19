@@ -1,0 +1,42 @@
+<div class="container">
+  <h1 class="light">Edit Profile</h1>
+  <md-content>
+    <form name="editForm" ng-submit="submit(data)">
+
+      <div layout="row">
+        <md-input-container flex="50">
+          <label>First Name</label>
+          <input required name="firstName" ng-model="data.user.first_name">
+          <div ng-messages="editForm.firstName.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container flex="50">
+          <label>Last Name</label>
+          <input required name="lastName" ng-model="data.user.last_name">
+          <div ng-messages="editForm.lastName.$error">
+            <div ng-message="required">This is required.</div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <md-input-container class="md-block">
+        <label>Email</label>
+        <input required type="email" name="clientEmail" ng-model="data.user.email"
+               minlength="10" maxlength="100" ng-pattern="/^.+@.+\..+$/" />
+
+        <div ng-messages="editForm.clientEmail.$error" role="alert">
+          <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+            Your email must be between 10 and 100 characters long and look like an e-mail address.
+          </div>
+        </div>
+      </md-input-container>
+
+      <div md-theme="teal-theme">
+        <md-button type="submit" class="md-primary md-raised pull-right no-margin medium">Save</md-button>
+      </div>
+
+    </form>
+  </md-content>
+</div>

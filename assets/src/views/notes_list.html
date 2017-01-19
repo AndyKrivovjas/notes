@@ -31,7 +31,7 @@
         </md-card-actions>
       </md-card>
     </div>
-    <div class="empty" ng-if="(data.notes |filter:filterNotes).length == 0">
+    <div class="empty" ng-if="(data.notes |filter:filterNotes).length == 0 && empty_notes_list">
       There is no entries yet.
     </div>
   </div>

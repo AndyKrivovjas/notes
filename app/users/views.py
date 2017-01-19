@@ -2,7 +2,7 @@ import json
 
 from app.api.errors import Error
 from .models import User
-from .serializers import UserSerializer, UserScopeSerializer, UserSerializerView
+from .serializers import UserSerializer, UserScopeSerializer, UserSerializerView, UserRestoreSerializer
 from .permissions import UserPermissions
 from django.http import Http404
 from rest_framework.views import APIView
@@ -50,6 +50,24 @@ class UserList(APIView):
             serializer.register(request.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class RestorePassword(APIView):
+    # List all users, or create a new user.
+
+    authentication_classes = []
+    permission_classes = [permissions.AllowAny]
+    required_scopes = []
+
+    def get(self, request, format=None):
+        users = User.objects.all()
+        serializer = UserSerializerView(users, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = UserRestoreSerializer(request.data)
+        print request.data
+        serializer.sendEmail(request.data.get('email'))
+        return Response(request.data)
 
 
 class UserDetail(APIView):
