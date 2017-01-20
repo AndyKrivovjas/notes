@@ -11,6 +11,12 @@ var notes = angular.module('notes', ['ngRoute', 'ngMaterial', 'angularMoment', '
 		templateUrl: './assets/src/views/login.html',
 		controller: 'LoginController'
 	})
+	.when('/user/restore', {
+		title: 'Restore Password',
+		page: 'login',
+		templateUrl: './assets/src/views/restore-password.html',
+		controller: 'LoginController'
+	})
 	.when('/profile/edit', {
 		title: 'Profile Edit',
 		page: 'profileEdit',

@@ -136,6 +136,9 @@ a {
 .tab-content > div:last-child {
   display: none;
 }
+.tab-content > div:first-child {
+  display: block;
+}
 
 md-dialog {
   position: fixed;

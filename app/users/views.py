@@ -1,5 +1,7 @@
 import json
 
+from rest_framework.reverse import reverse_lazy, reverse
+
 from app.api.errors import Error
 from .models import User
 from .serializers import UserSerializer, UserScopeSerializer, UserSerializerView, UserRestoreSerializer
@@ -58,16 +60,21 @@ class RestorePassword(APIView):
     permission_classes = [permissions.AllowAny]
     required_scopes = []
 
-    def get(self, request, format=None):
-        users = User.objects.all()
-        serializer = UserSerializerView(users, many=True)
-        return Response(serializer.data)
-
     def post(self, request, format=None):
-        serializer = UserRestoreSerializer(request.data)
-        print request.data
-        serializer.sendEmail(request.data.get('email'))
+        serializer = UserRestoreSerializer()
+        url = reverse('root', request=request)
+        serializer.sendEmail(request.data.get('email'), url)
         return Response(request.data)
+
+    def put(self, request, format=None):
+        serializer = UserRestoreSerializer()
+        pwd1 = request.data.get('password1')
+        pwd2 = request.data.get('password2')
+        if pwd1 == pwd2:
+            username = serializer.changePassword(pwd1, request.data.get('hash'))
+            data = { 'username': username, 'password': pwd1}
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(request.data, status=status.HTTP_400_BAD_REQUEST)
 
 
 class UserDetail(APIView):

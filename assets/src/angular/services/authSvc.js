@@ -67,6 +67,14 @@ notes.service('authSvc', ['$http', '$q', 'request', function($http, $q, request)
 		});;
 	}
 
+	this.changeRestoredPassword = function(data) {
+		return request.http({
+			method: 'PUT',
+			url: '/api/user/restore/',
+			data: data
+		});;
+	}
+
 	return authSvc;
 
 }]);
