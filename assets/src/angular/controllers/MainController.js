@@ -10,6 +10,29 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
   	$scope.progressbar.start();
  	});
 
+  $rootScope.pagination = {
+    limit: 10,
+    offset: 0
+  }
+
+  $scope.getNotes = function() {
+    $scope.allow_endless_scroll = false;
+    notesSvc.getNotes($rootScope.pagination).then(function(notesList) {
+			let notes = notesList || [];
+
+      if(notes.length) {
+        $scope.allow_endless_scroll = true;
+      }
+
+      for(let i = 0; i < notes.length; i++) {
+        $rootScope.data.notes.push(notes[i]);
+      }
+
+      $rootScope.pagination.offset += $rootScope.pagination.limit;
+			$rootScope.$broadcast('notes.loaded');
+		});
+  }
+
 	$scope.$on('$viewContentLoaded', function () {
 
 		if($rootScope.name == 'login') {
@@ -61,10 +84,14 @@ notes.controller('MainController', ['$scope', '$rootScope', '$routeParams', '$wi
 		notesSvc.getCategories().then(function(categoriesList) {
 			$rootScope.data.categories = categoriesList || [];
 		});
-		notesSvc.getNotes().then(function(notesList) {
-			$rootScope.data.notes = notesList || [];
-			$rootScope.$broadcast('notes.loaded');
-		});
+    $(window).scroll(function () {
+      if ($(window).scrollTop() >= $(document).height() - $(window).height() - 40) {
+        if($scope.allow_endless_scroll) {
+          $scope.getNotes();
+        }
+      }
+    });
+    $scope.getNotes();
 		notesSvc.getColors().then(function(colorsList) {
 			$rootScope.data.colors = colorsList || [];
 		});

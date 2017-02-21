@@ -1,3 +1,6 @@
+from rest_framework.generics import GenericAPIView
+from rest_framework.pagination import LimitOffsetPagination, PageNumberPagination
+
 from app.api.errors import Error
 from app.users.models import User
 from .models import Task, Color
@@ -23,15 +26,18 @@ class ColorList(APIView):
         return Response(serializer.data)
 
 
-class TaskList(APIView):
+class TaskList(GenericAPIView):
 
     authentication_classes = [OAuth2Authentication]
     permission_classes = [permissions.IsAuthenticated, TokenHasScope, ]
+    pagination_class = LimitOffsetPagination
     required_scopes = ['task']
 
     def get(self, request, format=None):
         tasks = Task.objects.filter(owner=request.user)
-        serializer = TaskSerializer(tasks, many=True)
+        queryset = self.paginate_queryset(tasks)
+        serializer = TaskSerializer(queryset, many=True)
+        self.get_paginated_response(serializer.data)
         return Response(serializer.data)
 
     def post(self, request, format=None):

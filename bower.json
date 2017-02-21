@@ -16,7 +16,8 @@
         "nicescroll": "latest",
         "lodash": "latest",
         "font-awesome": "latest",
-        "ngprogress": "latest"
+        "ngprogress": "latest",
+        "malihu-custom-scrollbar-plugin": "latest"
     },
     "private": true
 }

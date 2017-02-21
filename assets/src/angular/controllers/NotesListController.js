@@ -8,6 +8,9 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 		$scope.customFullscreen = (wantsFullScreen === true);
 	});
 
+  if(typeof window.localStorage.filter_tag == 'undefined') {
+    window.localStorage.filter_tag = null;
+  }
 	$rootScope.filter_tag = window.localStorage.filter_tag;
 	$scope.filterNotes = function(item) {
 		if(window.localStorage.filter_tag != "null") {
@@ -113,24 +116,24 @@ notes.controller('NotesListController', ['$scope', '$rootScope', '$routeParams',
 			}
 		}
 
-		// alertScope.querySearch = function(query) {
-		// 	var results = query ? alertScope.tags.filter(createFilterFor(query)) : alertScope.tags,
-		// 	deferred;
-		// 	if (alertScope.simulateQuery) {
-		// 		deferred = $q.defer();
-		// 		$timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
-		// 			return deferred.promise;
-		// 	} else {
-		// 		return results;
-		// 	}
-		// }
-		//
-		// function createFilterFor(query) {
-		// 	var lowercaseQuery = angular.lowercase(query);
-		// 	return function filterFn(state) {
-		// 		return (state.value.indexOf(lowercaseQuery) === 0);
-		// 	};
-		// }
+		alertScope.querySearch = function(query) {
+			var results = query ? alertScope.tags.filter(createFilterFor(query)) : alertScope.tags,
+			deferred;
+			if (alertScope.simulateQuery) {
+				deferred = $q.defer();
+				$timeout(function () { deferred.resolve( results ); }, Math.random() * 1000, false);
+					return deferred.promise;
+			} else {
+				return results;
+			}
+		}
+
+		function createFilterFor(query) {
+			var lowercaseQuery = angular.lowercase(query);
+			return function filterFn(state) {
+				return (state.value.indexOf(lowercaseQuery) === 0);
+			};
+		}
 
 		dialogSvc.dialog(ev, alertScope, 'assets/src/views/templates/form/note-form.html', useFullScreen);
 	};

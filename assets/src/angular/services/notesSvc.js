@@ -71,7 +71,8 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 	this.getNotes = function(data) {
 		return request.httpOauth({
 			method: 'GET',
-			url: '/api/tasks/'
+			url: '/api/tasks/',
+      params: data
 		});
 	}
 
@@ -98,7 +99,7 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 		});
 	}
 
-	/* -------------- Notes ---------------*/
+	/* -------------- Colors ---------------*/
 
 	this.getColors = function(data) {
 		return request.httpOauth({
@@ -106,5 +107,5 @@ notes.service('notesSvc', ['$http', '$q', 'request', function($http, $q, request
 			url: '/api/colors/'
 		});
 	}
-	
+
 }]);
