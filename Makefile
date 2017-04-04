@@ -13,6 +13,6 @@ make_fixtures:
 	./manage.py create_users
 	./manage.py create_api_application
 
-setup: migrations create_root_user make_fixtures
+setup: migrations make_fixtures
 
 reinstall: clean setup
