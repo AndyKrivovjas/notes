@@ -39,6 +39,28 @@
   .modal-up .textarea {
     min-width: 65vw;
   }
+  .login-page {
+    .hidden-header {
+      display: none;
+    }
+    #container {
+      padding-top: 57px;
+    }
+    .form {
+      margin: 0;
+      border-radius: 0;
+      height: calc(100vh - 58px);
+      #signup {
+        .field-wrap {
+          margin-bottom: 32px;
+        }
+      }
+      .button {
+        font-size: 18px;
+      }
+    }
+  }
+
 }
 
 /* Extra Small Devices, Phones */
