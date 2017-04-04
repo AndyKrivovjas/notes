@@ -6,7 +6,7 @@ migrations:
 	./manage.py migrate
 
 create_root_user:
-    ./manage.py createsuperuser --username=root --password=123 --email=root@example.com --noinput
+	./manage.py createsuperuser --username=root --password=123 --email=root@example.com --noinput
 
 make_fixtures:
 	./manage.py create_colors
