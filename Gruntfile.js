@@ -226,7 +226,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('test', ['targethtml:production']);
 	grunt.registerTask('min', ['concat', 'cssmin', 'uglify']);
-	grunt.registerTask('dev', ['targethtml:dev', 'compileNode']);
-	grunt.registerTask('production', ['targethtml:production', 'min']);
+	grunt.registerTask('dev', ['targethtml:dev', 'compileNode', 'sass']);
+	grunt.registerTask('production', ['targethtml:production', 'min', 'sass']);
 	grunt.registerTask('git', ['dev', 'shell:git_add', 'prompt:target', 'gitcommit', 'gitpush']);
 };
